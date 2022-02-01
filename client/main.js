@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { DynamicDrawUsage } from "three";
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls.js"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
 const clock = new THREE.Clock();
@@ -37,12 +39,36 @@ class BasicWorld {
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     // controls
-    const controls = new OrbitControls(this.camera, this.world.domElement);
-    this.camera.position.set(75, 20, 0);
-    controls.update();
+    const controls = new PointerLockControls(this.camera, this.world.domElement);
+    let clock = new THREE.Clock()
+    document.addEventListener('click', function (){
+      controls.lock()
+    })
+
+    const onKeyDown = function (event = KeyboardEvent){
+      switch (event.code){
+        case 'KeyW':
+          controls.moveForward(0.25)
+          break
+        case 'KeyA':
+            controls.moveRight(-0.25)
+            break
+        case 'KeyS':
+            controls.moveForward(-0.25)
+            break
+        case 'KeyD':
+            controls.moveRight(0.25)
+            break
+      }
+    }
+    document.addEventListener('keydown', onKeyDown, false)
+
+
 
     // scene
     this.scene = new THREE.Scene(); // container for everything in the scene
+
+
 
     // loads the background
     const loader = new THREE.CubeTextureLoader();
@@ -109,11 +135,33 @@ class BasicWorld {
     // created a previous render frame variable to hold elapsed time
     this.previousRenderFrame = null;
 
+
+   // loading a gltf file avatar
+
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(
+      "./resources/nicole.glb",
+      (gltf) => {
+        gltf.scene.traverse((c) => {
+          c.castShadow = true;
+        });
+
+        this.scene.add(gltf.scene);
+      },
+      undefined,
+      (error) => {
+        console.error(error);
+      }
+    );
+
+
+
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/model.fbx", (fbxObj) => {
       fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
       fbxObj.position.set(3, 0);
+
 
       // loading the fbx file of the player animation
       const animLoader = new FBXLoader();
@@ -135,6 +183,7 @@ class BasicWorld {
     });
 
     this.renderAnimationFrame();
+
   }
 
   _OnWindowResize() {
@@ -153,6 +202,8 @@ class BasicWorld {
       this.stepIntoNextFrame(time - this.previousRenderFrame);
       this.previousRenderFrame = time;
       this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
+
+
     });
   }
 
