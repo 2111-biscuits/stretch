@@ -36,10 +36,30 @@ class BasicWorld {
     const far = 1000.0;
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
-    // controls
-    const controls = new OrbitControls(this.camera, this.world.domElement);
-    this.camera.position.set(75, 20, 0);
-    controls.update();
+// controls
+    const controls = new PointerLockControls(this.camera, this.world.domElement);
+    let clock = new THREE.Clock()
+    document.addEventListener('click', function (){
+      controls.lock()
+    })
+
+    const onKeyDown = function (event = KeyboardEvent){
+      switch (event.code){
+        case 'KeyW':
+          controls.moveForward(0.25)
+          break
+        case 'KeyA':
+            controls.moveRight(-0.25)
+            break
+        case 'KeyS':
+            controls.moveForward(-0.25)
+            break
+        case 'KeyD':
+            controls.moveRight(0.25)
+            break
+      }
+    }
+    document.addEventListener('keydown', onKeyDown, false)
 
     // scene
     this.scene = new THREE.Scene(); // container for everything in the scene
