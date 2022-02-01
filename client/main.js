@@ -66,7 +66,6 @@ class BasicWorld {
         // const t = 0.05;
         // const t = 4.0 * timeElapsed;
         //const t = 1.0 - Math.pow(0.001, timeElapsed);
-
         this._currentPosition.copy(idealOffset);
         this._currentLookat.copy(idealLookat);
 
@@ -74,12 +73,32 @@ class BasicWorld {
         this.thirdPersonCamera.lookAt(this._currentLookat);
       }
     }
-    // controls
-    /*
-       const controls = new OrbitControls(this.camera, this.world.domElement);
 
-        controls.update();
-    */
+// controls
+    const controls = new PointerLockControls(this.camera, this.world.domElement);
+    let clock = new THREE.Clock()
+    document.addEventListener('click', function (){
+      controls.lock()
+    })
+
+    const onKeyDown = function (event = KeyboardEvent){
+      switch (event.code){
+        case 'KeyW':
+          controls.moveForward(0.25)
+          break
+        case 'KeyA':
+            controls.moveRight(-0.25)
+            break
+        case 'KeyS':
+            controls.moveForward(-0.25)
+            break
+        case 'KeyD':
+            controls.moveRight(0.25)
+            break
+      }
+    }
+    document.addEventListener('keydown', onKeyDown, false)
+
     // scene
     this.scene = new THREE.Scene(); // container for everything in the scene
 
