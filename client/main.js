@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { DynamicDrawUsage } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
@@ -35,6 +34,45 @@ class BasicWorld {
     const near = 1.0;
     const far = 1000.0;
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    this.camera.position.set(75, 20, 0);
+
+    class ThirdPersonCamera {
+      constructor(camera, target) {
+        this.thirdPersonCamera = camera;
+        this.thirdPersonTarget = target;
+
+        this._currentPosition = new THREE.Vector3();
+        this._currentLookat = new THREE.Vector3();
+      }
+
+      _CalculateIdealOffset() {
+        const idealOffset = new THREE.Vector3(-3, 2, -7);
+        //idealOffset.applyQuaternion(this.thirdPersonTarget.Rotation);
+        idealOffset.add(this.thirdPersonTarget.position);
+        return idealOffset;
+      }
+
+      _CalculateIdealLookat() {
+        const idealLookat = new THREE.Vector3(0, 10, 50);
+        //idealLookat.applyQuaternion(this.thirdPersonTarget.Rotation);
+        idealLookat.add(this.thirdPersonTarget.position);
+        return idealLookat;
+      }
+
+      Update(timeElapsed) {
+        const idealOffset = this._CalculateIdealOffset();
+        const idealLookat = this._CalculateIdealLookat();
+
+        // const t = 0.05;
+        // const t = 4.0 * timeElapsed;
+        //const t = 1.0 - Math.pow(0.001, timeElapsed);
+        this._currentPosition.copy(idealOffset);
+        this._currentLookat.copy(idealLookat);
+
+        this.thirdPersonCamera.position.copy(this._currentPosition);
+        this.thirdPersonCamera.lookAt(this._currentLookat);
+      }
+    }
 
 // controls
     const controls = new PointerLockControls(this.camera, this.world.domElement);
@@ -128,12 +166,14 @@ class BasicWorld {
     this.mixers = [];
     // created a previous render frame variable to hold elapsed time
     this.previousRenderFrame = null;
-
+    this.character;
+    this.characterCamera;
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/model.fbx", (fbxObj) => {
       fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
       fbxObj.position.set(3, 0);
+
 
       // loading the fbx file of the player animation
       const animLoader = new FBXLoader();
@@ -152,7 +192,10 @@ class BasicWorld {
       );
       // adding the animated fbx file to the scene
       this.scene.add(fbxObj);
+      this.character = fbxObj;
+      this.characterCamera = new ThirdPersonCamera(this.camera, this.character)
     });
+
 
     this.renderAnimationFrame();
   }
@@ -169,10 +212,13 @@ class BasicWorld {
         this.previousRenderFrame = time;
       }
 
-      this.world.render(this.scene, this.camera);
+      this.world.render(this.scene, this.camera)
+      //console.log("CHARACTER>>>>>", this.character)
+
       this.stepIntoNextFrame(time - this.previousRenderFrame);
       this.previousRenderFrame = time;
       this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
+
     });
   }
 
@@ -180,6 +226,10 @@ class BasicWorld {
     const timeElapsedSeconds = timeElapsed * 0.001;
     if (this.mixers) {
       this.mixers.map((mixer) => mixer.update(timeElapsedSeconds));
+    }
+    console.log("CAMERA>>>>>", this.characterCamera)
+    if (this.characterCamera) {
+      this.characterCamera.Update(timeElapsed);
     }
   }
 }

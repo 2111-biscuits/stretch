@@ -59446,7 +59446,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const clock = new three__WEBPACK_IMPORTED_MODULE_2__.Clock();
 
 class BasicWorld {
@@ -59474,11 +59473,55 @@ class BasicWorld {
     const aspect = 2;
     const near = 1.0;
     const far = 1000.0;
-    this.camera = new three__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera(fov, aspect, near, far); // controls
-
-    const controls = new three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_0__.OrbitControls(this.camera, this.world.domElement);
+    this.camera = new three__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera(fov, aspect, near, far);
     this.camera.position.set(75, 20, 0);
-    controls.update(); // scene
+
+    class ThirdPersonCamera {
+      constructor(camera, target) {
+        this.thirdPersonCamera = camera;
+        this.thirdPersonTarget = target;
+        this._currentPosition = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
+        this._currentLookat = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
+      }
+
+      _CalculateIdealOffset() {
+        const idealOffset = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(-3, 2, -7); //idealOffset.applyQuaternion(this.thirdPersonTarget.Rotation);
+
+        idealOffset.add(this.thirdPersonTarget.position);
+        return idealOffset;
+      }
+
+      _CalculateIdealLookat() {
+        const idealLookat = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(0, 10, 50); //idealLookat.applyQuaternion(this.thirdPersonTarget.Rotation);
+
+        idealLookat.add(this.thirdPersonTarget.position);
+        return idealLookat;
+      }
+
+      Update(timeElapsed) {
+        const idealOffset = this._CalculateIdealOffset();
+
+        const idealLookat = this._CalculateIdealLookat(); // const t = 0.05;
+        // const t = 4.0 * timeElapsed;
+        //const t = 1.0 - Math.pow(0.001, timeElapsed);
+
+
+        this._currentPosition.copy(idealOffset);
+
+        this._currentLookat.copy(idealLookat);
+
+        this.thirdPersonCamera.position.copy(this._currentPosition);
+        this.thirdPersonCamera.lookAt(this._currentLookat);
+      }
+
+    } // controls
+
+    /*
+       const controls = new OrbitControls(this.camera, this.world.domElement);
+         controls.update();
+    */
+    // scene
+
 
     this.scene = new three__WEBPACK_IMPORTED_MODULE_2__.Scene(); // container for everything in the scene
     // loads the background
@@ -59534,7 +59577,9 @@ class BasicWorld {
 
     this.mixers = []; // created a previous render frame variable to hold elapsed time
 
-    this.previousRenderFrame = null; // loading the fbx file of the player model
+    this.previousRenderFrame = null;
+    this.character;
+    this.characterCamera; // loading the fbx file of the player model
 
     const fbxLoader = new three_examples_jsm_loaders_FBXLoader_js__WEBPACK_IMPORTED_MODULE_1__.FBXLoader();
     fbxLoader.load("./resources/model.fbx", fbxObj => {
@@ -59555,6 +59600,8 @@ class BasicWorld {
       }); // adding the animated fbx file to the scene
 
       this.scene.add(fbxObj);
+      this.character = fbxObj;
+      this.characterCamera = new ThirdPersonCamera(this.camera, this.character);
     });
     this.renderAnimationFrame();
   }
@@ -59571,7 +59618,8 @@ class BasicWorld {
         this.previousRenderFrame = time;
       }
 
-      this.world.render(this.scene, this.camera);
+      this.world.render(this.scene, this.camera); //console.log("CHARACTER>>>>>", this.character)
+
       this.stepIntoNextFrame(time - this.previousRenderFrame);
       this.previousRenderFrame = time;
       this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
@@ -59583,6 +59631,12 @@ class BasicWorld {
 
     if (this.mixers) {
       this.mixers.map(mixer => mixer.update(timeElapsedSeconds));
+    }
+
+    console.log("CAMERA>>>>>", this.characterCamera);
+
+    if (this.characterCamera) {
+      this.characterCamera.Update(timeElapsed);
     }
   }
 
