@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
 class BasicWorld {
   constructor() {
@@ -68,7 +69,7 @@ class BasicWorld {
     light.shadow.camera.bottom = -200;
     this.scene.add(light);
 
-    // "floor"
+    // creating "floor" + adding it to scene
     const planeGeo = new THREE.PlaneGeometry(100, 100, 10, 10);
     const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x4cb963 });
     const plane = new THREE.Mesh(planeGeo, planeMaterial);
@@ -77,17 +78,16 @@ class BasicWorld {
     plane.receiveShadow = true;
     this.scene.add(plane);
 
-    // cube
+    // creating + adding single cubes to scene
     const cubeGeo = new THREE.BoxGeometry(2, 2, 2);
     const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xeae8ff });
     const cube = new THREE.Mesh(cubeGeo, cubeMaterial);
-    cube.position.set(1, 1, 1);
+    cube.position.set(1, 0, 1);
     cube.castShadow = true;
     cube.receiveShadow = true;
     this.scene.add(cube);
 
-    // many cubes
-
+    // creating + adding many cubes to scene
     for (let x = 0; x < 8; x++) {
       const box = new THREE.Mesh(
         new THREE.BoxGeometry(2, 2, 2),
@@ -100,6 +100,23 @@ class BasicWorld {
       box.receiveShadow = true;
       this.scene.add(box);
     }
+
+    // loading the fbx file of the player model
+    const fbxLoader = new FBXLoader();
+    fbxLoader.load("./resources/model.fbx", (fbxObj) => {
+      fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
+      fbxObj.position.set(3, 0);
+
+      // loading the fbx file of the player animation
+      const animLoader = new FBXLoader();
+      animLoader.load("./resources/dance.fbx", (animObj) => {
+        const mixer = new THREE.AnimationMixer(fbxObj); // pass in the player model to the animation mixer
+        const macarena = mixer.clipAction(animObj.animations[0]); // why is this .animations[0]?
+        macarena.play();
+      });
+      // adding the animated fbx file to the scene
+      this.scene.add(fbxObj);
+    });
 
     this.renderAnimationFrame();
   }
