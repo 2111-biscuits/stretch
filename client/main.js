@@ -1,13 +1,16 @@
 import * as THREE from "three";
+import { DynamicDrawUsage } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
+const clock = new THREE.Clock();
+
 class BasicWorld {
   constructor() {
-    this._Initialize();
+    this.init();
   }
 
-  _Initialize() {
+  init() {
     // renderer
     this.world = new THREE.WebGL1Renderer();
     this.world.shadowMap.enabled = true;
@@ -78,14 +81,14 @@ class BasicWorld {
     plane.receiveShadow = true;
     this.scene.add(plane);
 
-    // creating + adding single cubes to scene
-    const cubeGeo = new THREE.BoxGeometry(2, 2, 2);
-    const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xeae8ff });
-    const cube = new THREE.Mesh(cubeGeo, cubeMaterial);
-    cube.position.set(1, 0, 1);
-    cube.castShadow = true;
-    cube.receiveShadow = true;
-    this.scene.add(cube);
+    // // creating + adding single cubes to scene
+    // const cubeGeo = new THREE.BoxGeometry(2, 2, 2);
+    // const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xeae8ff });
+    // const cube = new THREE.Mesh(cubeGeo, cubeMaterial);
+    // cube.position.set(1, 0, 1);
+    // cube.castShadow = true;
+    // cube.receiveShadow = true;
+    // this.scene.add(cube);
 
     // creating + adding many cubes to scene
     for (let x = 0; x < 8; x++) {
@@ -101,6 +104,11 @@ class BasicWorld {
       this.scene.add(box);
     }
 
+    // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
+    this.mixers = [];
+    // created a previous render frame variable to hold elapsed time
+    this.previousRenderFrame = null;
+
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/model.fbx", (fbxObj) => {
@@ -109,11 +117,19 @@ class BasicWorld {
 
       // loading the fbx file of the player animation
       const animLoader = new FBXLoader();
-      animLoader.load("./resources/dance.fbx", (animObj) => {
-        const mixer = new THREE.AnimationMixer(fbxObj); // pass in the player model to the animation mixer
-        const macarena = mixer.clipAction(animObj.animations[0]); // why is this .animations[0]?
-        macarena.play();
-      });
+      animLoader.load(
+        "./resources/dance.fbx",
+        (animObj) => {
+          const animMixer = new THREE.AnimationMixer(fbxObj); // pass in the player model to the animation mixer
+          this.mixers.push(animMixer);
+          const dance = animMixer.clipAction(animObj.animations[0]); // why is this .animations[0]?
+          dance.play();
+        },
+        undefined,
+        (error) => {
+          console.log(error);
+        }
+      );
       // adding the animated fbx file to the scene
       this.scene.add(fbxObj);
     });
@@ -128,10 +144,23 @@ class BasicWorld {
   }
 
   renderAnimationFrame() {
-    requestAnimationFrame(() => {
+    requestAnimationFrame((time) => {
+      if (this.previousRenderFrame === null) {
+        this.previousRenderFrame = time;
+      }
+
       this.world.render(this.scene, this.camera);
-      this.renderAnimationFrame();
+      this.stepIntoNextFrame(time - this.previousRenderFrame);
+      this.previousRenderFrame = time;
+      this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
     });
+  }
+
+  stepIntoNextFrame(timeElapsed) {
+    const timeElapsedSeconds = timeElapsed * 0.001;
+    if (this.mixers) {
+      this.mixers.map((mixer) => mixer.update(timeElapsedSeconds));
+    }
   }
 }
 
