@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
+import BasicCharacterControls from "./characterControls.js";
 
 const clock = new THREE.Clock();
 
@@ -74,31 +76,34 @@ class BasicWorld {
       }
     }
 
-// controls
-    const controls = new PointerLockControls(this.camera, this.world.domElement);
-    let clock = new THREE.Clock()
-    document.addEventListener('click', function (){
-      controls.lock()
-    })
+    // controls
+    /*    const controls = new PointerLockControls(
+      this.camera,
+      this.world.domElement
+    );
+    let clock = new THREE.Clock();
+    document.addEventListener("click", function () {
+      controls.lock();
+    });
 
-    const onKeyDown = function (event = KeyboardEvent){
-      switch (event.code){
-        case 'KeyW':
-          controls.moveForward(0.25)
-          break
-        case 'KeyA':
-            controls.moveRight(-0.25)
-            break
-        case 'KeyS':
-            controls.moveForward(-0.25)
-            break
-        case 'KeyD':
-            controls.moveRight(0.25)
-            break
+    const onKeyDown = function (event = KeyboardEvent) {
+      switch (event.code) {
+        case "KeyW":
+          controls.moveForward(0.25);
+          break;
+        case "KeyA":
+          controls.moveRight(-0.25);
+          break;
+        case "KeyS":
+          controls.moveForward(-0.25);
+          break;
+        case "KeyD":
+          controls.moveRight(0.25);
+          break;
       }
-    }
-    document.addEventListener('keydown', onKeyDown, false)
-
+    };
+    document.addEventListener("keydown", onKeyDown, false);
+*/
     // scene
     this.scene = new THREE.Scene(); // container for everything in the scene
 
@@ -128,6 +133,9 @@ class BasicWorld {
     light.shadow.camera.right = -200;
     light.shadow.camera.top = 200;
     light.shadow.camera.bottom = -200;
+    this.scene.add(light);
+
+    light = new THREE.AmbientLight(0xffffff);
     this.scene.add(light);
 
     // creating "floor" + adding it to scene
@@ -174,9 +182,14 @@ class BasicWorld {
       fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
       fbxObj.position.set(3, 0);
 
+      const params = {
+        target: fbxObj,
+        camera: this.camera, //possibly this.camera
+      };
+      this._controls = new BasicCharacterControls(params);
 
       // loading the fbx file of the player animation
-      const animLoader = new FBXLoader();
+      /*     const animLoader = new FBXLoader();
       animLoader.load(
         "./resources/dance.fbx",
         (animObj) => {
@@ -189,13 +202,12 @@ class BasicWorld {
         (error) => {
           console.log(error);
         }
-      );
+      ); */
       // adding the animated fbx file to the scene
       this.scene.add(fbxObj);
       this.character = fbxObj;
-      this.characterCamera = new ThirdPersonCamera(this.camera, this.character)
+      this.characterCamera = new ThirdPersonCamera(this.camera, this.character);
     });
-
 
     this.renderAnimationFrame();
   }
@@ -212,13 +224,11 @@ class BasicWorld {
         this.previousRenderFrame = time;
       }
 
-      this.world.render(this.scene, this.camera)
-      //console.log("CHARACTER>>>>>", this.character)
+      this.world.render(this.scene, this.camera);
 
       this.stepIntoNextFrame(time - this.previousRenderFrame);
       this.previousRenderFrame = time;
       this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
-
     });
   }
 
@@ -227,9 +237,11 @@ class BasicWorld {
     if (this.mixers) {
       this.mixers.map((mixer) => mixer.update(timeElapsedSeconds));
     }
-    console.log("CAMERA>>>>>", this.characterCamera)
     if (this.characterCamera) {
       this.characterCamera.Update(timeElapsed);
+    }
+    if (this._controls) {
+      this._controls.Update(timeElapsedSeconds);
     }
   }
 }
