@@ -2,6 +2,167 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./client/characterControls.js":
+/*!*************************************!*\
+  !*** ./client/characterControls.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+
+
+class BasicCharacterControls {
+  constructor(params) {
+    this._Init(params);
+  }
+
+  _Init(params) {
+    this._params = params;
+    this._move = {
+      forward: false,
+      backward: false,
+      left: false,
+      right: false
+    };
+    this._decceleration = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(-0.0005, -0.0001, -5.0);
+    this._acceleration = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(1, 0.25, 50.0);
+    this._velocity = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(0, 0, 0);
+    document.addEventListener("keydown", e => this._onKeyDown(e), false);
+    document.addEventListener("keyup", e => this._onKeyUp(e), false);
+  }
+
+  _onKeyDown(event) {
+    switch (event.keyCode) {
+      case 87:
+        // w
+        this._move.forward = true;
+        break;
+
+      case 65:
+        // a
+        this._move.left = true;
+        break;
+
+      case 83:
+        // s
+        this._move.backward = true;
+        break;
+
+      case 68:
+        // d
+        this._move.right = true;
+        break;
+
+      case 38: // up
+
+      case 37: // left
+
+      case 40: // down
+
+      case 39:
+        // right
+        break;
+    }
+  }
+
+  _onKeyUp(event) {
+    switch (event.keyCode) {
+      case 87:
+        // w
+        this._move.forward = false;
+        break;
+
+      case 65:
+        // a
+        this._move.left = false;
+        break;
+
+      case 83:
+        // s
+        this._move.backward = false;
+        break;
+
+      case 68:
+        // d
+        this._move.right = false;
+        break;
+
+      case 38: // up
+
+      case 37: // left
+
+      case 40: // down
+
+      case 39:
+        // right
+        break;
+    }
+  }
+
+  Update(timeInSeconds) {
+    const velocity = this._velocity;
+    const frameDecceleration = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(velocity.x * this._decceleration.x, velocity.y * this._decceleration.y, velocity.z * this._decceleration.z);
+    frameDecceleration.multiplyScalar(timeInSeconds);
+    frameDecceleration.z = Math.sign(frameDecceleration.z) * Math.min(Math.abs(frameDecceleration.z), Math.abs(velocity.z));
+    velocity.add(frameDecceleration);
+    const controlObject = this._params.target;
+
+    const _Q = new three__WEBPACK_IMPORTED_MODULE_0__.Quaternion();
+
+    const _A = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3();
+
+    const _R = controlObject.quaternion.clone();
+
+    if (this._move.forward) {
+      velocity.z += this._acceleration.z * timeInSeconds;
+    }
+
+    if (this._move.backward) {
+      velocity.z -= this._acceleration.z * timeInSeconds;
+    }
+
+    if (this._move.left) {
+      _A.set(0, 1, 0);
+
+      _Q.setFromAxisAngle(_A, Math.PI * timeInSeconds * this._acceleration.y);
+
+      _R.multiply(_Q);
+    }
+
+    if (this._move.right) {
+      _A.set(0, 1, 0);
+
+      _Q.setFromAxisAngle(_A, -Math.PI * timeInSeconds * this._acceleration.y);
+
+      _R.multiply(_Q);
+    }
+
+    controlObject.quaternion.copy(_R);
+    const oldPosition = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3();
+    oldPosition.copy(controlObject.position);
+    const forward = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(0, 0, 1);
+    forward.applyQuaternion(controlObject.quaternion);
+    forward.normalize();
+    const sideways = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(1, 0, 0);
+    sideways.applyQuaternion(controlObject.quaternion);
+    sideways.normalize();
+    sideways.multiplyScalar(velocity.x * timeInSeconds);
+    forward.multiplyScalar(velocity.z * timeInSeconds);
+    controlObject.position.add(forward);
+    controlObject.position.add(sideways);
+    oldPosition.copy(controlObject.position);
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BasicCharacterControls);
+
+/***/ }),
+
 /***/ "./node_modules/three/build/three.module.js":
 /*!**************************************************!*\
   !*** ./node_modules/three/build/three.module.js ***!
@@ -52159,6 +52320,179 @@ class MapControls extends OrbitControls {
 
 /***/ }),
 
+/***/ "./node_modules/three/examples/jsm/controls/PointerLockControls.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/three/examples/jsm/controls/PointerLockControls.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PointerLockControls": () => (/* binding */ PointerLockControls)
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+
+
+const _euler = new three__WEBPACK_IMPORTED_MODULE_0__.Euler( 0, 0, 0, 'YXZ' );
+const _vector = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3();
+
+const _changeEvent = { type: 'change' };
+const _lockEvent = { type: 'lock' };
+const _unlockEvent = { type: 'unlock' };
+
+const _PI_2 = Math.PI / 2;
+
+class PointerLockControls extends three__WEBPACK_IMPORTED_MODULE_0__.EventDispatcher {
+
+	constructor( camera, domElement ) {
+
+		super();
+
+		if ( domElement === undefined ) {
+
+			console.warn( 'THREE.PointerLockControls: The second parameter "domElement" is now mandatory.' );
+			domElement = document.body;
+
+		}
+
+		this.domElement = domElement;
+		this.isLocked = false;
+
+		// Set to constrain the pitch of the camera
+		// Range is 0 to Math.PI radians
+		this.minPolarAngle = 0; // radians
+		this.maxPolarAngle = Math.PI; // radians
+
+		const scope = this;
+
+		function onMouseMove( event ) {
+
+			if ( scope.isLocked === false ) return;
+
+			const movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+			const movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+			_euler.setFromQuaternion( camera.quaternion );
+
+			_euler.y -= movementX * 0.002;
+			_euler.x -= movementY * 0.002;
+
+			_euler.x = Math.max( _PI_2 - scope.maxPolarAngle, Math.min( _PI_2 - scope.minPolarAngle, _euler.x ) );
+
+			camera.quaternion.setFromEuler( _euler );
+
+			scope.dispatchEvent( _changeEvent );
+
+		}
+
+		function onPointerlockChange() {
+
+			if ( scope.domElement.ownerDocument.pointerLockElement === scope.domElement ) {
+
+				scope.dispatchEvent( _lockEvent );
+
+				scope.isLocked = true;
+
+			} else {
+
+				scope.dispatchEvent( _unlockEvent );
+
+				scope.isLocked = false;
+
+			}
+
+		}
+
+		function onPointerlockError() {
+
+			console.error( 'THREE.PointerLockControls: Unable to use Pointer Lock API' );
+
+		}
+
+		this.connect = function () {
+
+			scope.domElement.ownerDocument.addEventListener( 'mousemove', onMouseMove );
+			scope.domElement.ownerDocument.addEventListener( 'pointerlockchange', onPointerlockChange );
+			scope.domElement.ownerDocument.addEventListener( 'pointerlockerror', onPointerlockError );
+
+		};
+
+		this.disconnect = function () {
+
+			scope.domElement.ownerDocument.removeEventListener( 'mousemove', onMouseMove );
+			scope.domElement.ownerDocument.removeEventListener( 'pointerlockchange', onPointerlockChange );
+			scope.domElement.ownerDocument.removeEventListener( 'pointerlockerror', onPointerlockError );
+
+		};
+
+		this.dispose = function () {
+
+			this.disconnect();
+
+		};
+
+		this.getObject = function () { // retaining this method for backward compatibility
+
+			return camera;
+
+		};
+
+		this.getDirection = function () {
+
+			const direction = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3( 0, 0, - 1 );
+
+			return function ( v ) {
+
+				return v.copy( direction ).applyQuaternion( camera.quaternion );
+
+			};
+
+		}();
+
+		this.moveForward = function ( distance ) {
+
+			// move forward parallel to the xz-plane
+			// assumes camera.up is y-up
+
+			_vector.setFromMatrixColumn( camera.matrix, 0 );
+
+			_vector.crossVectors( camera.up, _vector );
+
+			camera.position.addScaledVector( _vector, distance );
+
+		};
+
+		this.moveRight = function ( distance ) {
+
+			_vector.setFromMatrixColumn( camera.matrix, 0 );
+
+			camera.position.addScaledVector( _vector, distance );
+
+		};
+
+		this.lock = function () {
+
+			this.domElement.requestPointerLock();
+
+		};
+
+		this.unlock = function () {
+
+			scope.domElement.ownerDocument.exitPointerLock();
+
+		};
+
+		this.connect();
+
+	}
+
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/three/examples/jsm/curves/NURBSCurve.js":
 /*!**************************************************************!*\
   !*** ./node_modules/three/examples/jsm/curves/NURBSCurve.js ***!
@@ -59440,13 +59774,17 @@ var __webpack_exports__ = {};
   !*** ./client/main.js ***!
   \************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
 /* harmony import */ var three_examples_jsm_loaders_FBXLoader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/loaders/FBXLoader.js */ "./node_modules/three/examples/jsm/loaders/FBXLoader.js");
+/* harmony import */ var three_examples_jsm_controls_PointerLockControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/jsm/controls/PointerLockControls */ "./node_modules/three/examples/jsm/controls/PointerLockControls.js");
+/* harmony import */ var _characterControls_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./characterControls.js */ "./client/characterControls.js");
 
 
 
-const clock = new three__WEBPACK_IMPORTED_MODULE_2__.Clock();
+
+
+const clock = new three__WEBPACK_IMPORTED_MODULE_4__.Clock();
 
 class BasicWorld {
   constructor() {
@@ -59455,9 +59793,9 @@ class BasicWorld {
 
   init() {
     // renderer
-    this.world = new three__WEBPACK_IMPORTED_MODULE_2__.WebGL1Renderer();
+    this.world = new three__WEBPACK_IMPORTED_MODULE_4__.WebGL1Renderer();
     this.world.shadowMap.enabled = true;
-    this.world.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_2__.PCFSoftShadowMap; // shadows
+    this.world.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_4__.PCFSoftShadowMap; // shadows
 
     this.world.setPixelRatio(window.devicePixelRatio);
     this.world.setSize(window.innerWidth, window.innerHeight); // sets scene width
@@ -59473,26 +59811,26 @@ class BasicWorld {
     const aspect = 2;
     const near = 1.0;
     const far = 1000.0;
-    this.camera = new three__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera(fov, aspect, near, far);
+    this.camera = new three__WEBPACK_IMPORTED_MODULE_4__.PerspectiveCamera(fov, aspect, near, far);
     this.camera.position.set(75, 20, 0);
 
     class ThirdPersonCamera {
       constructor(camera, target) {
         this.thirdPersonCamera = camera;
         this.thirdPersonTarget = target;
-        this._currentPosition = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
-        this._currentLookat = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
+        this._currentPosition = new three__WEBPACK_IMPORTED_MODULE_4__.Vector3();
+        this._currentLookat = new three__WEBPACK_IMPORTED_MODULE_4__.Vector3();
       }
 
       _CalculateIdealOffset() {
-        const idealOffset = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(-3, 2, -7); //idealOffset.applyQuaternion(this.thirdPersonTarget.Rotation);
+        const idealOffset = new three__WEBPACK_IMPORTED_MODULE_4__.Vector3(-3, 2, -7); //idealOffset.applyQuaternion(this.thirdPersonTarget.Rotation);
 
         idealOffset.add(this.thirdPersonTarget.position);
         return idealOffset;
       }
 
       _CalculateIdealLookat() {
-        const idealLookat = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(0, 10, 50); //idealLookat.applyQuaternion(this.thirdPersonTarget.Rotation);
+        const idealLookat = new three__WEBPACK_IMPORTED_MODULE_4__.Vector3(0, 10, 50); //idealLookat.applyQuaternion(this.thirdPersonTarget.Rotation);
 
         idealLookat.add(this.thirdPersonTarget.position);
         return idealLookat;
@@ -59516,21 +59854,43 @@ class BasicWorld {
 
     } // controls
 
-    /*
-       const controls = new OrbitControls(this.camera, this.world.domElement);
-         controls.update();
+    /*    const controls = new PointerLockControls(
+      this.camera,
+      this.world.domElement
+    );
+    let clock = new THREE.Clock();
+    document.addEventListener("click", function () {
+      controls.lock();
+    });
+     const onKeyDown = function (event = KeyboardEvent) {
+      switch (event.code) {
+        case "KeyW":
+          controls.moveForward(0.25);
+          break;
+        case "KeyA":
+          controls.moveRight(-0.25);
+          break;
+        case "KeyS":
+          controls.moveForward(-0.25);
+          break;
+        case "KeyD":
+          controls.moveRight(0.25);
+          break;
+      }
+    };
+    document.addEventListener("keydown", onKeyDown, false);
     */
     // scene
 
 
-    this.scene = new three__WEBPACK_IMPORTED_MODULE_2__.Scene(); // container for everything in the scene
+    this.scene = new three__WEBPACK_IMPORTED_MODULE_4__.Scene(); // container for everything in the scene
     // loads the background
 
-    const loader = new three__WEBPACK_IMPORTED_MODULE_2__.CubeTextureLoader();
+    const loader = new three__WEBPACK_IMPORTED_MODULE_4__.CubeTextureLoader();
     const texture = loader.load(["./resources/Box_Right.bmp", "./resources/Box_Left.bmp", "./resources/Box_Top.bmp", "./resources/Box_Bottom.bmp", "./resources/Box_Front.bmp", "./resources/Box_Back.bmp"]);
     this.scene.background = texture; // light
 
-    let light = new three__WEBPACK_IMPORTED_MODULE_2__.DirectionalLight(0xffffff);
+    let light = new three__WEBPACK_IMPORTED_MODULE_4__.DirectionalLight(0xffffff);
     light.position.set(100, 100, 100);
     light.target.position.set(0, 0, 0);
     light.castShadow = true;
@@ -59543,13 +59903,15 @@ class BasicWorld {
     light.shadow.camera.right = -200;
     light.shadow.camera.top = 200;
     light.shadow.camera.bottom = -200;
+    this.scene.add(light);
+    light = new three__WEBPACK_IMPORTED_MODULE_4__.AmbientLight(0xffffff);
     this.scene.add(light); // creating "floor" + adding it to scene
 
-    const planeGeo = new three__WEBPACK_IMPORTED_MODULE_2__.PlaneGeometry(100, 100, 10, 10);
-    const planeMaterial = new three__WEBPACK_IMPORTED_MODULE_2__.MeshStandardMaterial({
+    const planeGeo = new three__WEBPACK_IMPORTED_MODULE_4__.PlaneGeometry(100, 100, 10, 10);
+    const planeMaterial = new three__WEBPACK_IMPORTED_MODULE_4__.MeshStandardMaterial({
       color: 0x4cb963
     });
-    const plane = new three__WEBPACK_IMPORTED_MODULE_2__.Mesh(planeGeo, planeMaterial);
+    const plane = new three__WEBPACK_IMPORTED_MODULE_4__.Mesh(planeGeo, planeMaterial);
     plane.rotation.x = -Math.PI / 2; // makes it "on the floor"
 
     plane.castShadow = false;
@@ -59564,15 +59926,43 @@ class BasicWorld {
     // this.scene.add(cube);
     // creating + adding many cubes to scene
 
-    for (let x = 0; x < 8; x++) {
-      const box = new three__WEBPACK_IMPORTED_MODULE_2__.Mesh(new three__WEBPACK_IMPORTED_MODULE_2__.BoxGeometry(2, 2, 2), new three__WEBPACK_IMPORTED_MODULE_2__.MeshStandardMaterial({
-        color: 0xeae8ff
-      }));
+    const boxLoader = new three__WEBPACK_IMPORTED_MODULE_4__.TextureLoader();
+    const art = [new three__WEBPACK_IMPORTED_MODULE_4__.MeshBasicMaterial({
+      map: boxLoader.load('artBox/troll_rainbow.jpg')
+    }), new three__WEBPACK_IMPORTED_MODULE_4__.MeshBasicMaterial({
+      map: boxLoader.load('artBox/lotus_background.jpg')
+    }), new three__WEBPACK_IMPORTED_MODULE_4__.MeshBasicMaterial({
+      map: boxLoader.load('artBox/norm.png')
+    }), new three__WEBPACK_IMPORTED_MODULE_4__.MeshBasicMaterial({
+      map: boxLoader.load('artBox/spacey_background.jpeg')
+    }), new three__WEBPACK_IMPORTED_MODULE_4__.MeshBasicMaterial({
+      map: boxLoader.load('artBox/tropiVapor.jpeg')
+    }), new three__WEBPACK_IMPORTED_MODULE_4__.MeshBasicMaterial({
+      map: boxLoader.load('artBox/vaporWater.jpeg')
+    })];
+
+    for (let x = 0; x < 6; x++) {
+      const box = new three__WEBPACK_IMPORTED_MODULE_4__.Mesh(new three__WEBPACK_IMPORTED_MODULE_4__.BoxGeometry(2, 2, 2), art[x] // new THREE.MeshStandardMaterial({
+      //   color: 0xeae8ff,
+      // })
+      );
       box.position.set(Math.random() + x * 5, Math.random(), Math.random());
       box.castShadow = true;
       box.receiveShadow = true;
       this.scene.add(box);
-    } // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
+    }
+    /* const loader = new THREE.TextureLoader();
+    const materials = [
+    new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-1.jpg')}),
+    new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-2.jpg')}),
+    new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-3.jpg')}),
+    new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-4.jpg')}),
+    new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-5.jpg')}),
+    new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-6.jpg')}),
+    ];
+    const cube = new THREE.Mesh(geometry, material);
+    const cube = new THREE.Mesh(geometry, materials);*/
+    // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
 
 
     this.mixers = []; // created a previous render frame variable to hold elapsed time
@@ -59585,19 +59975,29 @@ class BasicWorld {
     fbxLoader.load("./resources/model.fbx", fbxObj => {
       fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
 
-      fbxObj.position.set(3, 0); // loading the fbx file of the player animation
+      fbxObj.position.set(3, 0);
+      const params = {
+        target: fbxObj,
+        camera: this.camera //possibly this.camera
 
-      const animLoader = new three_examples_jsm_loaders_FBXLoader_js__WEBPACK_IMPORTED_MODULE_1__.FBXLoader();
-      animLoader.load("./resources/dance.fbx", animObj => {
-        const animMixer = new three__WEBPACK_IMPORTED_MODULE_2__.AnimationMixer(fbxObj); // pass in the player model to the animation mixer
+      };
+      this._controls = new _characterControls_js__WEBPACK_IMPORTED_MODULE_3__["default"](params); // loading the fbx file of the player animation
 
-        this.mixers.push(animMixer);
-        const dance = animMixer.clipAction(animObj.animations[0]); // why is this .animations[0]?
-
-        dance.play();
-      }, undefined, error => {
-        console.log(error);
-      }); // adding the animated fbx file to the scene
+      /*     const animLoader = new FBXLoader();
+      animLoader.load(
+        "./resources/dance.fbx",
+        (animObj) => {
+          const animMixer = new THREE.AnimationMixer(fbxObj); // pass in the player model to the animation mixer
+          this.mixers.push(animMixer);
+          const dance = animMixer.clipAction(animObj.animations[0]); // why is this .animations[0]?
+          dance.play();
+        },
+        undefined,
+        (error) => {
+          console.log(error);
+        }
+      ); */
+      // adding the animated fbx file to the scene
 
       this.scene.add(fbxObj);
       this.character = fbxObj;
@@ -59618,8 +60018,7 @@ class BasicWorld {
         this.previousRenderFrame = time;
       }
 
-      this.world.render(this.scene, this.camera); //console.log("CHARACTER>>>>>", this.character)
-
+      this.world.render(this.scene, this.camera);
       this.stepIntoNextFrame(time - this.previousRenderFrame);
       this.previousRenderFrame = time;
       this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
@@ -59633,10 +60032,12 @@ class BasicWorld {
       this.mixers.map(mixer => mixer.update(timeElapsedSeconds));
     }
 
-    console.log("CAMERA>>>>>", this.characterCamera);
-
     if (this.characterCamera) {
       this.characterCamera.Update(timeElapsed);
+    }
+
+    if (this._controls) {
+      this._controls.Update(timeElapsedSeconds);
     }
   }
 

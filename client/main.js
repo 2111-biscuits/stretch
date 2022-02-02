@@ -157,18 +157,46 @@ class BasicWorld {
     // this.scene.add(cube);
 
     // creating + adding many cubes to scene
-    for (let x = 0; x < 8; x++) {
+  const boxLoader = new THREE.TextureLoader();
+const art = [
+new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/troll_rainbow.jpg')}),
+new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/lotus_background.jpg')}),
+new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/norm.png')}),
+new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/spacey_background.jpeg')}),
+new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/tropiVapor.jpeg')}),
+new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/vaporWater.jpeg')}),
+
+]
+    for (let x = 0; x < 6; x++) {
       const box = new THREE.Mesh(
-        new THREE.BoxGeometry(2, 2, 2),
-        new THREE.MeshStandardMaterial({
-          color: 0xeae8ff,
-        })
+        new THREE.BoxGeometry(2, 2, 2), art[x]
+        // new THREE.MeshStandardMaterial({
+        //   color: 0xeae8ff,
+        // })
       );
       box.position.set(Math.random() + x * 5, Math.random(), Math.random());
       box.castShadow = true;
       box.receiveShadow = true;
       this.scene.add(box);
     }
+
+
+
+    /* const loader = new THREE.TextureLoader();
+
+
+const materials = [
+  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-1.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-2.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-3.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-4.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-5.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-6.jpg')}),
+];
+const cube = new THREE.Mesh(geometry, material);
+const cube = new THREE.Mesh(geometry, materials);*/
+
+
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
