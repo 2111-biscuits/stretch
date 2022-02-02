@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
 class BasicCharacterControls {
   constructor(params) {
@@ -16,9 +17,21 @@ class BasicCharacterControls {
     this._decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
     this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
     this._velocity = new THREE.Vector3(0, 0, 0);
+    this._position = new THREE.Vector3();
 
     document.addEventListener("keydown", (e) => this._onKeyDown(e), false);
     document.addEventListener("keyup", (e) => this._onKeyUp(e), false);
+  }
+
+  get Position() {
+    return this._position;
+  }
+
+  get Rotation() {
+    if (!this._params.target) {
+      return new THREE.Quaternion();
+    }
+    return this._params.target.quaternion;
   }
 
   _onKeyDown(event) {
@@ -120,7 +133,8 @@ class BasicCharacterControls {
     controlObject.position.add(forward);
     controlObject.position.add(sideways);
 
-    oldPosition.copy(controlObject.position);
+    this._position.copy(controlObject.position);
+    // oldPosition.copy(controlObject.position);
   }
 }
 
