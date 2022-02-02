@@ -36,28 +36,28 @@ class BasicWorld {
     const near = 1.0;
     const far = 1000.0;
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    this.camera.position.set(75, 20, 0);
+    this.camera.position.set(25, 0, 0);
 
     class ThirdPersonCamera {
-      constructor(camera, target) {
-        this.thirdPersonCamera = camera;
-        this.thirdPersonTarget = target;
+      constructor(params) {
+        this._params = params;
+        this._camera = params.camera;
 
         this._currentPosition = new THREE.Vector3();
         this._currentLookat = new THREE.Vector3();
       }
 
       _CalculateIdealOffset() {
-        const idealOffset = new THREE.Vector3(-3, 2, -7);
-        //idealOffset.applyQuaternion(this.thirdPersonTarget.Rotation);
-        idealOffset.add(this.thirdPersonTarget.position);
+        const idealOffset = new THREE.Vector3(-1, 1, -3);
+        idealOffset.applyQuaternion(this._params.target.Rotation);
+        idealOffset.add(this._params.target.Position);
         return idealOffset;
       }
 
       _CalculateIdealLookat() {
         const idealLookat = new THREE.Vector3(0, 10, 50);
-        //idealLookat.applyQuaternion(this.thirdPersonTarget.Rotation);
-        idealLookat.add(this.thirdPersonTarget.position);
+        idealLookat.applyQuaternion(this._params.target.Rotation);
+        idealLookat.add(this._params.target.Position);
         return idealLookat;
       }
 
@@ -67,43 +67,16 @@ class BasicWorld {
 
         // const t = 0.05;
         // const t = 4.0 * timeElapsed;
-        //const t = 1.0 - Math.pow(0.001, timeElapsed);
-        this._currentPosition.copy(idealOffset);
-        this._currentLookat.copy(idealLookat);
+        const t = 1.0 - Math.pow(0.001, timeElapsed);
 
-        this.thirdPersonCamera.position.copy(this._currentPosition);
-        this.thirdPersonCamera.lookAt(this._currentLookat);
+        this._currentPosition.lerp(idealOffset, t);
+        this._currentLookat.lerp(idealLookat, t);
+
+        this._camera.position.copy(this._currentPosition);
+        this._camera.lookAt(this._currentLookat);
       }
     }
 
-    // controls
-    /*    const controls = new PointerLockControls(
-      this.camera,
-      this.world.domElement
-    );
-    let clock = new THREE.Clock();
-    document.addEventListener("click", function () {
-      controls.lock();
-    });
-
-    const onKeyDown = function (event = KeyboardEvent) {
-      switch (event.code) {
-        case "KeyW":
-          controls.moveForward(0.25);
-          break;
-        case "KeyA":
-          controls.moveRight(-0.25);
-          break;
-        case "KeyS":
-          controls.moveForward(-0.25);
-          break;
-        case "KeyD":
-          controls.moveRight(0.25);
-          break;
-      }
-    };
-    document.addEventListener("keydown", onKeyDown, false);
-*/
     // scene
     this.scene = new THREE.Scene(); // container for everything in the scene
 
@@ -176,6 +149,7 @@ class BasicWorld {
     this.previousRenderFrame = null;
     this.character;
     this.characterCamera;
+
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/model.fbx", (fbxObj) => {
@@ -184,6 +158,7 @@ class BasicWorld {
 
       const params = {
         target: fbxObj,
+        scene: this.scene,
         camera: this.camera, //possibly this.camera
       };
       this._controls = new BasicCharacterControls(params);
@@ -206,7 +181,8 @@ class BasicWorld {
       // adding the animated fbx file to the scene
       this.scene.add(fbxObj);
       this.character = fbxObj;
-      this.characterCamera = new ThirdPersonCamera(this.camera, this.character);
+      const camParams = { camera: this.camera, target: this._controls };
+      this.characterCamera = new ThirdPersonCamera(camParams);
     });
 
     this.renderAnimationFrame();
@@ -224,11 +200,12 @@ class BasicWorld {
         this.previousRenderFrame = time;
       }
 
+      this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
+
       this.world.render(this.scene, this.camera);
 
       this.stepIntoNextFrame(time - this.previousRenderFrame);
       this.previousRenderFrame = time;
-      this.renderAnimationFrame(); // continuously call renderAnimationFrame so it is always updating
     });
   }
 
@@ -237,11 +214,12 @@ class BasicWorld {
     if (this.mixers) {
       this.mixers.map((mixer) => mixer.update(timeElapsedSeconds));
     }
-    if (this.characterCamera) {
-      this.characterCamera.Update(timeElapsed);
-    }
     if (this._controls) {
       this._controls.Update(timeElapsedSeconds);
+    }
+
+    if (this.characterCamera) {
+      this.characterCamera.Update(timeElapsed);
     }
   }
 }
