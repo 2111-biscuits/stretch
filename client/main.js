@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import BasicCharacterControls from "./characterControls.js";
-import { createArt } from "./artBoxes.js";
+import { createArtBoxes } from "./artBoxes.js";
 
 const clock = new THREE.Clock();
 
@@ -49,7 +49,7 @@ class BasicWorld {
       }
 
       _CalculateIdealOffset() {
-        const idealOffset = new THREE.Vector3(-1, 1, -3);
+        const idealOffset = new THREE.Vector3(-1, .5, -3);
         idealOffset.applyQuaternion(this._params.target.Rotation);
         idealOffset.add(this._params.target.Position);
         return idealOffset;
@@ -89,7 +89,7 @@ class BasicWorld {
       "./resources/Box_Top.bmp",
       "./resources/Box_Bottom.bmp",
       "./resources/Box_Front.bmp",
-      "./resources/Box_Back.bmp"
+      "./resources/Box_Back.bmp",
     ]);
     this.scene.background = texture;
 
@@ -122,8 +122,8 @@ class BasicWorld {
     this.scene.add(plane);
 
     //adding the art to the scene
-    const artBoxes = createArt();
-    artBoxes.forEach((panel) => this.scene.add(panel));
+    const artBoxes = createArtBoxes();
+    artBoxes.forEach((box) => this.scene.add(box));
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
@@ -134,14 +134,17 @@ class BasicWorld {
 
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
-    fbxLoader.load("./resources/model.fbx", (fbxObj) => {
-      fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
-      fbxObj.position.set(3, 0);
+
+    fbxLoader.load("./resources/avatarOrb.fbx", (fbxObj) => {
+      fbxObj.scale.set(.0015, .0015, .0015)
+      // fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
+      fbxObj.position.set(22, 1, -25);
+
 
       const params = {
         target: fbxObj,
         scene: this.scene,
-        camera: this.camera //possibly this.camera
+        camera: this.camera
       };
       this._controls = new BasicCharacterControls(params);
 
