@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import BasicCharacterControls from "../characterControls.js";
 import { createArtBoxes } from "../artBoxes.js";
+import Audio from "./Audio.js"
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -48,7 +49,7 @@ class Gallery extends React.Component {
           }
 
           _CalculateIdealOffset() {
-            const idealOffset = new THREE.Vector3(-1, 1, -10);
+            const idealOffset = new THREE.Vector3(-1, .5, -3);
             idealOffset.applyQuaternion(this._params.target.Rotation);
             idealOffset.add(this._params.target.Position);
             return idealOffset;
@@ -124,7 +125,8 @@ class Gallery extends React.Component {
 
         //adding the art to the scene
         const artBoxes = createArtBoxes();
-        artBoxes.forEach((panel) => this.scene.add(panel));
+        artBoxes.forEach((box) => this.scene.add(box));
+
 
         // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
         this.mixers = [];
@@ -135,9 +137,9 @@ class Gallery extends React.Component {
 
         // loading the fbx file of the player model
         const fbxLoader = new FBXLoader();
-        fbxLoader.load("./resources/theOrb.fbx", (fbxObj) => {
-          fbxObj.scale.set(0.005, 0.005, 0.005); // scales down the fbx object
-          fbxObj.position.set(3, 2);
+        fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
+          fbxObj.scale.set(0.0015, 0.0015, 0.0015); // scales down the fbx object
+          fbxObj.position.set(22, 1, -25);
 
           const params = {
             target: fbxObj,
@@ -216,7 +218,11 @@ class Gallery extends React.Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <Audio />
+      </div>
+    )
   }
 }
 
