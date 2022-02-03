@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import BasicCharacterControls from "./characterControls.js";
-import { createArt } from "./artBoxes.js";
+import { createArtBoxes } from "./artBoxes.js";
 
 const clock = new THREE.Clock();
 
@@ -122,8 +122,8 @@ class BasicWorld {
     this.scene.add(plane);
 
     //adding the art to the scene
-    const artBoxes = createArt();
-    artBoxes.forEach((panel) => this.scene.add(panel));
+    const artBoxes = createArtBoxes();
+    artBoxes.forEach((box) => this.scene.add(box));
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
@@ -141,7 +141,7 @@ class BasicWorld {
       const params = {
         target: fbxObj,
         scene: this.scene,
-        camera: this.camera //possibly this.camera
+        camera: this.camera
       };
       this._controls = new BasicCharacterControls(params);
 
