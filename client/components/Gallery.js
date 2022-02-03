@@ -128,7 +128,6 @@ class Gallery extends React.Component {
         artBoxes.forEach((box) => this.scene.add(box));
 
 
-
         // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
         this.mixers = [];
         // created a previous render frame variable to hold elapsed time
