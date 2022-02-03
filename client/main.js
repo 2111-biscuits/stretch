@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import BasicCharacterControls from "./characterControls.js";
-import { createArt } from "./artBoxes.js"
+import { createArt } from "./artBoxes.js";
 
 const clock = new THREE.Clock();
 
@@ -89,7 +89,7 @@ class BasicWorld {
       "./resources/Box_Top.bmp",
       "./resources/Box_Bottom.bmp",
       "./resources/Box_Front.bmp",
-      "./resources/Box_Back.bmp",
+      "./resources/Box_Back.bmp"
     ]);
     this.scene.background = texture;
 
@@ -121,12 +121,9 @@ class BasicWorld {
     plane.receiveShadow = true;
     this.scene.add(plane);
 
-
     //adding the art to the scene
-    const artBoxes = createArt()
-    artBoxes.forEach(panel => this.scene.add(panel))
-
-
+    const artBoxes = createArt();
+    artBoxes.forEach((panel) => this.scene.add(panel));
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
@@ -144,10 +141,9 @@ class BasicWorld {
       const params = {
         target: fbxObj,
         scene: this.scene,
-        camera: this.camera, //possibly this.camera
+        camera: this.camera //possibly this.camera
       };
       this._controls = new BasicCharacterControls(params);
-
 
       // loading the fbx file of the player animation
       /*     const animLoader = new FBXLoader();
@@ -164,7 +160,6 @@ class BasicWorld {
           console.log(error);
         }
       ); */
-
 
       // adding the animated fbx file to the scene
       this.scene.add(fbxObj);
