@@ -135,7 +135,7 @@ class BasicWorld {
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
 
-    fbxLoader.load("./resources/avatarOrb.fbx", (fbxObj) => {
+    fbxLoader.load("./resources/silverOrb.fbx", (fbxObj) => {
       fbxObj.scale.set(.0015, .0015, .0015)
       // fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
       fbxObj.position.set(22, 1, -25);
