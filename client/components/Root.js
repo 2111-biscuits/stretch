@@ -6,17 +6,10 @@ import LandingPage from "./LandingPage";
 
 const Root = () => {
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
-      <main>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
-      </main>
-    </div>
+    <Routes>
+      <Route index element={<LandingPage />} />
+      <Route path="/gallery" element={<Gallery />} />
+    </Routes>
   );
 };
 
