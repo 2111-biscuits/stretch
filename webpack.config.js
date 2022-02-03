@@ -1,7 +1,7 @@
 module.exports = {
   mode: "development",
   /* starting point for our frontend JavaScript (place to enter when bundling) */
-  entry: "./client/main.js",
+  entry: "./client/index.js",
   /* where to output our newly bundled file */
   output: {
     path: __dirname + "/public", // the ABSOLUTE path for the directory
@@ -12,9 +12,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /jsx?$/, // which files to apply this loader to (end in `js` or `jsx`)
-        exclude: /(node_modules|bower_components)/, // which folders to ignore / not apply this to
-        use: ["babel-loader"], // which loader to use for this rule-set --> check out .babelrc for our specified rules
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-react"],
+        },
       },
     ],
   },
