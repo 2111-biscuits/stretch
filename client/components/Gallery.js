@@ -2,7 +2,8 @@ import React from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import BasicCharacterControls from "../characterControls.js";
-import { createArt } from "../artBoxes.js";
+import { createArtBoxes } from "../artBoxes.js";
+import Audio from "./Audio.js"
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -123,7 +124,7 @@ class Gallery extends React.Component {
         this.scene.add(plane);
 
         //adding the art to the scene
-        const artBoxes = createArt();
+        const artBoxes = createArtBoxes();
         artBoxes.forEach((panel) => this.scene.add(panel));
 
         // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
@@ -216,7 +217,11 @@ class Gallery extends React.Component {
   }
 
   render() {
-    return <div>Hello I'm the gallery</div>;
+    return (
+      <div>
+        <Audio />
+      </div>
+    )
   }
 }
 
