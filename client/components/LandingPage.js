@@ -1,7 +1,9 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
 
 class LandingPage extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <div id="landing">
         <div id="header"></div>
@@ -15,9 +17,9 @@ class LandingPage extends React.Component {
         </div>
         <div id="bottom">
           <h1>Name of Exhibit</h1>
-          <button id="enter-button" onClick={() => console.log("hello")}>
-            Enter
-          </button>
+          <Link to="/gallery">
+            <button id="enter-button">Enter</button>
+          </Link>
           <div id="dates">
             <h4>JAN 28 - MAR 14 2022</h4>
           </div>
