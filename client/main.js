@@ -89,7 +89,7 @@ class BasicWorld {
       "./resources/Box_Top.bmp",
       "./resources/Box_Bottom.bmp",
       "./resources/Box_Front.bmp",
-      "./resources/Box_Back.bmp"
+      "./resources/Box_Back.bmp",
     ]);
     this.scene.background = texture;
 
@@ -134,10 +134,12 @@ class BasicWorld {
 
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
+
     fbxLoader.load("./resources/avatarOrb.fbx", (fbxObj) => {
       fbxObj.scale.set(.0015, .0015, .0015)
       // fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
       fbxObj.position.set(22, 1, -25);
+
 
       const params = {
         target: fbxObj,
