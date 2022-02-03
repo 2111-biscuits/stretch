@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import BasicCharacterControls from "../characterControls.js";
 import { createArtBoxes } from "../artBoxes.js";
+import Audio from "./Audio.js"
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -126,6 +127,8 @@ class Gallery extends React.Component {
         const artBoxes = createArtBoxes();
         artBoxes.forEach((box) => this.scene.add(box));
 
+
+
         // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
         this.mixers = [];
         // created a previous render frame variable to hold elapsed time
@@ -216,7 +219,11 @@ class Gallery extends React.Component {
   }
 
   render() {
-    return <div>Hello I'm the gallery</div>;
+    return (
+      <div>
+        <Audio />
+      </div>
+    )
   }
 }
 
