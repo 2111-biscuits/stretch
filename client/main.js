@@ -49,7 +49,7 @@ class BasicWorld {
       }
 
       _CalculateIdealOffset() {
-        const idealOffset = new THREE.Vector3(-1, 1, -3);
+        const idealOffset = new THREE.Vector3(-1, .5, -3);
         idealOffset.applyQuaternion(this._params.target.Rotation);
         idealOffset.add(this._params.target.Position);
         return idealOffset;
@@ -134,9 +134,10 @@ class BasicWorld {
 
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
-    fbxLoader.load("./resources/model.fbx", (fbxObj) => {
-      fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
-      fbxObj.position.set(3, 0);
+    fbxLoader.load("./resources/avatarOrb.fbx", (fbxObj) => {
+      fbxObj.scale.set(.0015, .0015, .0015)
+      // fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
+      fbxObj.position.set(22, 1, -25);
 
       const params = {
         target: fbxObj,
