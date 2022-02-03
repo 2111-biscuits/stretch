@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import BasicCharacterControls from "./characterControls.js";
+import { createArt } from "./artBoxes.js"
 
 const clock = new THREE.Clock();
 
@@ -120,54 +121,10 @@ class BasicWorld {
     plane.receiveShadow = true;
     this.scene.add(plane);
 
-    // // creating + adding single cubes to scene
-    // const cubeGeo = new THREE.BoxGeometry(2, 2, 2);
-    // const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xeae8ff });
-    // const cube = new THREE.Mesh(cubeGeo, cubeMaterial);
-    // cube.position.set(1, 0, 1);
-    // cube.castShadow = true;
-    // cube.receiveShadow = true;
-    // this.scene.add(cube);
 
-    // creating + adding many cubes to scene
-  const boxLoader = new THREE.TextureLoader();
-const art = [
-new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/troll_rainbow.jpg')}),
-new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/lotus_background.jpg')}),
-new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/norm.png')}),
-new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/spacey_background.jpeg')}),
-new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/tropiVapor.jpeg')}),
-new THREE.MeshBasicMaterial({map: boxLoader.load('artBox/vaporWater.jpeg')}),
-
-]
-    for (let x = 0; x < 6; x++) {
-      const box = new THREE.Mesh(
-        new THREE.BoxGeometry(2, 2, 2), art[x]
-        // new THREE.MeshStandardMaterial({
-        //   color: 0xeae8ff,
-        // })
-      );
-      box.position.set(Math.random() + x * 5, Math.random(), Math.random());
-      box.castShadow = true;
-      box.receiveShadow = true;
-      this.scene.add(box);
-    }
-
-
-
-    /* const loader = new THREE.TextureLoader();
-
-
-const materials = [
-  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-1.jpg')}),
-  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-2.jpg')}),
-  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-3.jpg')}),
-  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-4.jpg')}),
-  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-5.jpg')}),
-  new THREE.MeshBasicMaterial({map: loader.load('resources/images/flower-6.jpg')}),
-];
-const cube = new THREE.Mesh(geometry, material);
-const cube = new THREE.Mesh(geometry, materials);*/
+    //adding the art to the scene
+    const artBoxes = createArt()
+    artBoxes.forEach(panel => this.scene.add(panel))
 
 
 
@@ -191,6 +148,7 @@ const cube = new THREE.Mesh(geometry, materials);*/
       };
       this._controls = new BasicCharacterControls(params);
 
+
       // loading the fbx file of the player animation
       /*     const animLoader = new FBXLoader();
       animLoader.load(
@@ -206,6 +164,8 @@ const cube = new THREE.Mesh(geometry, materials);*/
           console.log(error);
         }
       ); */
+
+
       // adding the animated fbx file to the scene
       this.scene.add(fbxObj);
       this.character = fbxObj;
