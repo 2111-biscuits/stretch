@@ -4,6 +4,7 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 class BasicCharacterControls {
   constructor(params) {
     this._Init(params);
+    this.art = params.art;
   }
 
   _Init(params) {
@@ -18,6 +19,7 @@ class BasicCharacterControls {
     this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
     this._velocity = new THREE.Vector3(0, 0, 0);
     this._position = new THREE.Vector3();
+    this._radius = 0.5; //used in collision
 
     document.addEventListener("keydown", (e) => this._onKeyDown(e), false);
     document.addEventListener("keyup", (e) => this._onKeyUp(e), false);
@@ -78,6 +80,20 @@ class BasicCharacterControls {
     }
   }
 
+  _FindIntersections(boxes, position) {
+    //creates a sphere around the player based on position
+    //sphere is as large as the radius we set when player controls are initialized (ours is .5)
+    const sphere = new THREE.Sphere(position, this._radius);
+
+    //checks position of each canvas box in relation to the players current position and returns an array of all intersections
+    //intersectsBox is available as part of sphere geometry
+    const intersections = boxes.filter((b) => {
+      return sphere.intersectsBox(b);
+    });
+
+    return intersections;
+  }
+
   Update(timeInSeconds) {
     const velocity = this._velocity;
     const frameDecceleration = new THREE.Vector3(
@@ -116,6 +132,13 @@ class BasicCharacterControls {
 
     controlObject.quaternion.copy(_R);
 
+    //Box3 represents an axis-aligned bounding box (AABB) in 3D space.
+    //creating a Box3 based on the position of the canvas will set the min/max boundaries that will be detected when testing for collision
+    const boxes = this.art.map((canvas) => {
+      const box = new THREE.Box3().setFromObject(canvas);
+      return box;
+    });
+
     const oldPosition = new THREE.Vector3();
     oldPosition.copy(controlObject.position);
 
@@ -133,8 +156,19 @@ class BasicCharacterControls {
     controlObject.position.add(forward);
     controlObject.position.add(sideways);
 
+    let intersections = this._FindIntersections(boxes, controlObject.position);
+    //if there are intersections between the players and the canvas boxes, the player can't move
+    if (intersections.length > 0) {
+      controlObject.position.copy(oldPosition);
+    }
+
     this._position.copy(controlObject.position);
-    // oldPosition.copy(controlObject.position);
+    intersections = this._FindIntersections(boxes, controlObject.position);
+    if (intersections.length > 0) {
+      controlObject.position.copy(oldPosition);
+      //in next frame the player won't be able to keep moving if there is a collision/intersection detected
+      this._velocity.y = Math.max(0, this._velocity.y);
+    }
   }
 }
 

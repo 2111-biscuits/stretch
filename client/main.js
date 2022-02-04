@@ -19,7 +19,7 @@ class BasicWorld {
     this.world.shadowMap.type = THREE.PCFSoftShadowMap; // shadows
     this.world.setPixelRatio(window.devicePixelRatio);
     this.world.setSize(window.innerWidth, window.innerHeight); // sets scene width
-
+    this.art = []; //used when we need to check if player is colliding with artwork
     // handles resizing
     window.addEventListener(
       "resize",
@@ -89,7 +89,7 @@ class BasicWorld {
       "./resources/Box_Top.bmp",
       "./resources/Box_Bottom.bmp",
       "./resources/Box_Front.bmp",
-      "./resources/Box_Back.bmp"
+      "./resources/Box_Back.bmp",
     ]);
     this.scene.background = texture;
 
@@ -124,6 +124,7 @@ class BasicWorld {
     //adding the art to the scene
     const artBoxes = createArt();
     artBoxes.forEach((panel) => this.scene.add(panel));
+    artBoxes.forEach((panel) => this.art.push(panel)); // pushes each artwork into the this.art array which is used to check for collisions
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
@@ -136,12 +137,13 @@ class BasicWorld {
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/model.fbx", (fbxObj) => {
       fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
-      fbxObj.position.set(3, 0);
+      fbxObj.position.set(22, 0, -25);
 
       const params = {
         target: fbxObj,
+        art: this.art, //send artwork to the character controls so we can set up collision based on movements
         scene: this.scene,
-        camera: this.camera //possibly this.camera
+        camera: this.camera, //possibly this.camera
       };
       this._controls = new BasicCharacterControls(params);
 
