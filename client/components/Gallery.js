@@ -5,15 +5,18 @@ import BasicCharacterControls from "../characterControls.js";
 import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
+import { Link } from "react-router-dom";
 
 class Gallery extends React.Component {
   componentDidMount() {
     // renderer
+    let factor1 = 0.98; // percentage of the screen width
+    let factor2 = 0.96; // percentage of the screen height
     let world = new THREE.WebGL1Renderer();
     world.shadowMap.enabled = true;
     world.shadowMap.type = THREE.PCFSoftShadowMap; // shadows
     world.setPixelRatio(window.devicePixelRatio);
-    world.setSize(window.innerWidth, window.innerHeight); // sets scene width
+    world.setSize(window.innerWidth * factor1, window.innerHeight * factor2); // sets scene width
     let art = []; //used when we need to check if player is colliding with artwork
     this.mount.appendChild(world.domElement);
 
@@ -29,16 +32,15 @@ class Gallery extends React.Component {
     let scene = new THREE.Scene(); // container for everything in the scene
 
     // loads the background
-    const loader = new THREE.CubeTextureLoader();
-    const texture = loader.load([
-      "./resources/Box_Right.bmp",
-      "./resources/Box_Left.bmp",
-      "./resources/Box_Top.bmp",
-      "./resources/Box_Bottom.bmp",
-      "./resources/Box_Front.bmp",
-      "./resources/Box_Back.bmp",
-    ]);
-    scene.background = texture;
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(
+      "resources/whitesands_pano2.jpg", () => {
+        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+        rt.fromEquirectangularTexture(world, texture);
+        scene.background = rt.texture;
+      }
+    );
+    //scene.background = texture;
 
     // light
     let light = new THREE.DirectionalLight(0xffffff);
@@ -61,14 +63,15 @@ class Gallery extends React.Component {
 
     // creating "floor" + adding it to scene
     const planeGeo = new THREE.PlaneGeometry(100, 100, 10, 10);
+    const planeLoader = new THREE.TextureLoader();
     const planeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x4cb963,
+      map: planeLoader.load("resources/white-sand-floor.jpg")
     });
     const plane = new THREE.Mesh(planeGeo, planeMaterial);
     plane.rotation.x = -Math.PI / 2; // makes it "on the floor"
     plane.castShadow = false;
     plane.receiveShadow = true;
-    scene.add(plane);
+    //scene.add(plane);
 
     //adding the art to the scene
     const artBoxes = createArtBoxes();
@@ -86,7 +89,7 @@ class Gallery extends React.Component {
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
       fbxObj.scale.set(0.0015, 0.0015, 0.0015); // scales down the fbx object
-      fbxObj.position.set(22, 1, -25);
+      fbxObj.position.set(22, 1, -75);
 
       const params = {
         target: fbxObj,
@@ -103,9 +106,10 @@ class Gallery extends React.Component {
     });
 
     const OnWindowResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect =
+        ((window.innerWidth * factor1) / window.innerHeight) * factor2;
       camera.updateProjectionMatrix();
-      world.setSize(window.innerWidth, window.innerHeight);
+      world.setSize(window.innerWidth * factor1, window.innerHeight * factor2);
     };
 
     const renderAnimationFrame = () => {
@@ -151,9 +155,14 @@ class Gallery extends React.Component {
 
   render() {
     return (
-      <div>
-        <Audio />
-        <div ref={(ref) => (this.mount = ref)}></div>
+      <div id="gallery">
+        <div id="navbar">
+          <Audio />
+          <Link to="/">
+            <button id="exit-button">Exit</button>
+          </Link>
+        </div>
+        <div id="3dworld" ref={(ref) => (this.mount = ref)}></div>
       </div>
     );
   }

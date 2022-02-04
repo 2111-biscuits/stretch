@@ -15,13 +15,13 @@ class BasicCharacterControls {
       left: false,
       right: false,
       up: false,
-      down:false
+      down: false,
     };
     this._decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
     this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
     this._velocity = new THREE.Vector3(0, 0, 0);
     this._position = new THREE.Vector3();
-    this._radius = 0.5; //used in collision
+    this._radius = 0.25; //used in collision
 
     document.addEventListener("keydown", (e) => this._onKeyDown(e), false);
     document.addEventListener("keyup", (e) => this._onKeyUp(e), false);
@@ -132,7 +132,6 @@ class BasicCharacterControls {
       _R.multiply(_Q);
     }
 
-
     controlObject.quaternion.copy(_R);
 
     //Box3 represents an axis-aligned bounding box (AABB) in 3D space.
@@ -176,3 +175,7 @@ class BasicCharacterControls {
 }
 
 export default BasicCharacterControls;
+
+//collision references:
+//https://github.com/flutterfromscratch/threejs-rocket-game/blob/master/game/collisionDetection.ts
+//https://github.com/simondevyoutube/Quick_MinecraftClone2
