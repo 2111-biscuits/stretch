@@ -19,7 +19,7 @@ class BasicWorld {
     this.world.shadowMap.type = THREE.PCFSoftShadowMap; // shadows
     this.world.setPixelRatio(window.devicePixelRatio);
     this.world.setSize(window.innerWidth, window.innerHeight); // sets scene width
-
+    this.art = []; //used when we need to check if player is colliding with artwork
     // handles resizing
     window.addEventListener(
       "resize",
@@ -49,7 +49,7 @@ class BasicWorld {
       }
 
       _CalculateIdealOffset() {
-        const idealOffset = new THREE.Vector3(-1, .5, -3);
+        const idealOffset = new THREE.Vector3(-1, 0.5, -3);
         idealOffset.applyQuaternion(this._params.target.Rotation);
         idealOffset.add(this._params.target.Position);
         return idealOffset;
@@ -124,6 +124,7 @@ class BasicWorld {
     //adding the art to the scene
     const artBoxes = createArtBoxes();
     artBoxes.forEach((box) => this.scene.add(box));
+    artBoxes.forEach((box) => this.art.push(box)); // pushes each artwork into the this.art array which is used to check for collisions
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
@@ -136,15 +137,15 @@ class BasicWorld {
     const fbxLoader = new FBXLoader();
 
     fbxLoader.load("./resources/silverOrb.fbx", (fbxObj) => {
-      fbxObj.scale.set(.0015, .0015, .0015)
+      fbxObj.scale.set(0.0015, 0.0015, 0.0015);
       // fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
       fbxObj.position.set(22, 1, -25);
 
-
       const params = {
         target: fbxObj,
+        art: this.art, //send artwork to the character controls so we can set up collision based on movements
         scene: this.scene,
-        camera: this.camera
+        camera: this.camera, //possibly this.camera
       };
       this._controls = new BasicCharacterControls(params);
 

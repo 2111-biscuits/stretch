@@ -6,21 +6,21 @@ export function createArtBoxes() {
   const blankSide = new THREE.MeshBasicMaterial({ color: 0xffffff });
   const art = [
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/troll_rainbow.jpg")
+      map: boxLoader.load("artBox/troll_rainbow.jpg"),
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/lotus_background.jpg")
+      map: boxLoader.load("artBox/lotus_background.jpg"),
     }),
     new THREE.MeshBasicMaterial({ map: boxLoader.load("artBox/norm.png") }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/spacey_background.jpeg")
+      map: boxLoader.load("artBox/spacey_background.jpeg"),
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/tropiVapor.jpeg")
+      map: boxLoader.load("artBox/tropiVapor.jpeg"),
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/vaporWater.jpeg")
-    })
+      map: boxLoader.load("artBox/vaporWater.jpeg"),
+    }),
   ];
 
   for (let x = 0; x < art.length; x++) {
@@ -33,7 +33,7 @@ export function createArtBoxes() {
       }
     }
     const box = new THREE.Mesh(new THREE.BoxGeometry(6, 8, 1), panels);
-    box.position.set(Math.random() + x * 10, 0, 0);
+    box.position.set(Math.random() + x * 10, 4, 0);
     box.castShadow = true;
     box.receiveShadow = true;
     artBoxes.push(box);
