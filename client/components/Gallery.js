@@ -5,15 +5,18 @@ import BasicCharacterControls from "../characterControls.js";
 import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
+import { Link } from "react-router-dom";
 
 class Gallery extends React.Component {
   componentDidMount() {
     // renderer
+    let factor1 = 0.98; // percentage of the screen width
+    let factor2 = 0.96; // percentage of the screen height
     let world = new THREE.WebGL1Renderer();
     world.shadowMap.enabled = true;
     world.shadowMap.type = THREE.PCFSoftShadowMap; // shadows
     world.setPixelRatio(window.devicePixelRatio);
-    world.setSize(window.innerWidth, window.innerHeight); // sets scene width
+    world.setSize(window.innerWidth * factor1, window.innerHeight * factor2); // sets scene width
     let art = []; //used when we need to check if player is colliding with artwork
     this.mount.appendChild(world.domElement);
 
@@ -103,9 +106,10 @@ class Gallery extends React.Component {
     });
 
     const OnWindowResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect =
+        ((window.innerWidth * factor1) / window.innerHeight) * factor2;
       camera.updateProjectionMatrix();
-      world.setSize(window.innerWidth, window.innerHeight);
+      world.setSize(window.innerWidth * factor1, window.innerHeight * factor2);
     };
 
     const renderAnimationFrame = () => {
@@ -151,9 +155,14 @@ class Gallery extends React.Component {
 
   render() {
     return (
-      <div>
-        <Audio />
-        <div ref={(ref) => (this.mount = ref)}></div>
+      <div id="gallery">
+        <div id="navbar">
+          <Audio />
+          <Link to="/">
+            <button id="exit-button">Exit</button>
+          </Link>
+        </div>
+        <div id="3dworld" ref={(ref) => (this.mount = ref)}></div>
       </div>
     );
   }

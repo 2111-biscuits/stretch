@@ -39,6 +39,32 @@ body {
   height: 25px;
 }
 
+#gallery {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#gallery > #navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: transparent;
+  z-index: 1;
+  width: 97%;
+  padding: 10px;
+}
+
+#3dworld {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 h1,
 h3,
 h4 {
@@ -47,4 +73,28 @@ h4 {
 
 h1 {
   font-size: 72px;
+}
+
+.player,
+#exit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+#exit-button {
+  background-color: #ffffff;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+#icon {
+  width: 25px;
+  height: 25px;
 }
