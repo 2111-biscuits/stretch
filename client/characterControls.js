@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
+//import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 
 class BasicCharacterControls {
   constructor(params) {
@@ -14,6 +14,8 @@ class BasicCharacterControls {
       backward: false,
       left: false,
       right: false,
+      up: false,
+      down:false
     };
     this._decceleration = new THREE.Vector3(-0.0005, -0.0001, -5.0);
     this._acceleration = new THREE.Vector3(1, 0.25, 50.0);
@@ -129,6 +131,7 @@ class BasicCharacterControls {
       _Q.setFromAxisAngle(_A, -Math.PI * timeInSeconds * this._acceleration.y);
       _R.multiply(_Q);
     }
+
 
     controlObject.quaternion.copy(_R);
 

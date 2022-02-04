@@ -1,8 +1,9 @@
 import * as THREE from "three";
 
-export function createArt() {
-  let artPanels = [];
+export function createArtBoxes() {
+  let artBoxes = [];
   const boxLoader = new THREE.TextureLoader();
+  const blankSide = new THREE.MeshBasicMaterial({ color: 0xffffff });
   const art = [
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/troll_rainbow.jpg"),
@@ -21,7 +22,6 @@ export function createArt() {
       map: boxLoader.load("artBox/vaporWater.jpeg"),
     }),
   ];
-  const blankSide = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
   for (let x = 0; x < art.length; x++) {
     let panels = [];
@@ -36,7 +36,7 @@ export function createArt() {
     box.position.set(Math.random() + x * 10, 4, 0);
     box.castShadow = true;
     box.receiveShadow = true;
-    artPanels.push(box);
+    artBoxes.push(box);
   }
-  return artPanels;
+  return artBoxes;
 }

@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 import BasicCharacterControls from "./characterControls.js";
-import { createArt } from "./artBoxes.js";
+import { createArtBoxes } from "./artBoxes.js";
 
 const clock = new THREE.Clock();
 
@@ -49,7 +49,7 @@ class BasicWorld {
       }
 
       _CalculateIdealOffset() {
-        const idealOffset = new THREE.Vector3(-1, 1, -3);
+        const idealOffset = new THREE.Vector3(-1, 0.5, -3);
         idealOffset.applyQuaternion(this._params.target.Rotation);
         idealOffset.add(this._params.target.Position);
         return idealOffset;
@@ -122,9 +122,9 @@ class BasicWorld {
     this.scene.add(plane);
 
     //adding the art to the scene
-    const artBoxes = createArt();
-    artBoxes.forEach((panel) => this.scene.add(panel));
-    artBoxes.forEach((panel) => this.art.push(panel)); // pushes each artwork into the this.art array which is used to check for collisions
+    const artBoxes = createArtBoxes();
+    artBoxes.forEach((box) => this.scene.add(box));
+    artBoxes.forEach((box) => this.art.push(box)); // pushes each artwork into the this.art array which is used to check for collisions
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.mixers = [];
@@ -135,9 +135,11 @@ class BasicWorld {
 
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
-    fbxLoader.load("./resources/model.fbx", (fbxObj) => {
-      fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
-      fbxObj.position.set(22, 0, -25);
+
+    fbxLoader.load("./resources/silverOrb.fbx", (fbxObj) => {
+      fbxObj.scale.set(0.0015, 0.0015, 0.0015);
+      // fbxObj.scale.set(0.01, 0.01, 0.01); // scales down the fbx object
+      fbxObj.position.set(22, 1, -25);
 
       const params = {
         target: fbxObj,
