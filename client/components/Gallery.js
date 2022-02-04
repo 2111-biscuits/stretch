@@ -86,7 +86,7 @@ class Gallery extends React.Component {
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
       fbxObj.scale.set(0.0015, 0.0015, 0.0015); // scales down the fbx object
-      fbxObj.position.set(22, 1, -25);
+      fbxObj.position.set(22, 1, -75);
 
       const params = {
         target: fbxObj,
