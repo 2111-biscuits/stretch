@@ -3,7 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 
 class LandingPage extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <div id="landing">
         <div id="header"></div>

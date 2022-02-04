@@ -29,16 +29,15 @@ class Gallery extends React.Component {
     let scene = new THREE.Scene(); // container for everything in the scene
 
     // loads the background
-    const loader = new THREE.CubeTextureLoader();
-    const texture = loader.load([
-      "./resources/Box_Right.bmp",
-      "./resources/Box_Left.bmp",
-      "./resources/Box_Top.bmp",
-      "./resources/Box_Bottom.bmp",
-      "./resources/Box_Front.bmp",
-      "./resources/Box_Back.bmp",
-    ]);
-    scene.background = texture;
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(
+      "resources/whitesands_pano2.jpg", () => {
+        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+        rt.fromEquirectangularTexture(world, texture);
+        scene.background = rt.texture;
+      }
+    );
+    //scene.background = texture;
 
     // light
     let light = new THREE.DirectionalLight(0xffffff);
@@ -61,14 +60,15 @@ class Gallery extends React.Component {
 
     // creating "floor" + adding it to scene
     const planeGeo = new THREE.PlaneGeometry(100, 100, 10, 10);
+    const planeLoader = new THREE.TextureLoader();
     const planeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x4cb963,
+      map: planeLoader.load("resources/white-sand-floor.jpg")
     });
     const plane = new THREE.Mesh(planeGeo, planeMaterial);
     plane.rotation.x = -Math.PI / 2; // makes it "on the floor"
     plane.castShadow = false;
     plane.receiveShadow = true;
-    scene.add(plane);
+    //scene.add(plane);
 
     //adding the art to the scene
     const artBoxes = createArtBoxes();

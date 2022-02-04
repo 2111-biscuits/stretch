@@ -20,18 +20,19 @@ class Audio extends React.Component {
       icon.src = "playButton.png"
     }
   }
+
   render() {
+
     return (
       <div>
         <div className="player">
           <p>Click Here To Listen</p>
-          <img src="playButton.png" id="icon" onClick={this.handleClick} />
+          <img src="pauseButton.png" id="icon" onClick={this.handleClick} />
         </div>
-
-        <audio id="mySong">
+        <audio id="mySong" autoPlay={true} >
           <source src={this.audioURL} type="audio/mp3" />
         </audio>
-      </div>
+      </div >
     )
   }
 }
