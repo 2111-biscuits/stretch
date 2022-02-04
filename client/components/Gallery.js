@@ -14,6 +14,7 @@ class Gallery extends React.Component {
     world.shadowMap.type = THREE.PCFSoftShadowMap; // shadows
     world.setPixelRatio(window.devicePixelRatio);
     world.setSize(window.innerWidth, window.innerHeight); // sets scene width
+    let art = []; //used when we need to check if player is colliding with artwork
     this.mount.appendChild(world.domElement);
 
     // camera
@@ -72,6 +73,7 @@ class Gallery extends React.Component {
     //adding the art to the scene
     const artBoxes = createArtBoxes();
     artBoxes.forEach((box) => scene.add(box));
+    artBoxes.forEach((box) => art.push(box)); // pushes each artwork into the this.art array which is used to check for collisions
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     let mixers = [];
@@ -88,8 +90,9 @@ class Gallery extends React.Component {
 
       const params = {
         target: fbxObj,
-        scene: this.scene,
-        camera: this.camera, //possibly this.camera
+        art: art,
+        scene,
+        camera, //possibly this.camera
       };
       controls = new BasicCharacterControls(params);
 
