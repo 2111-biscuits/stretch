@@ -6,20 +6,34 @@ export function createArtBoxes() {
   const blankSide = new THREE.MeshBasicMaterial({ color: 0xffffff });
   const art = [
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/troll_rainbow.jpg"),
+      map: boxLoader.load("artBox/cara_art.JPG"), //0
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/lotus_background.jpg"),
-    }),
-    new THREE.MeshBasicMaterial({ map: boxLoader.load("artBox/norm.png") }),
-    new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/spacey_background.jpeg"),
+      map: boxLoader.load("artBox/cara_art2.JPG"), //1
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/tropiVapor.jpeg"),
+      map: boxLoader.load("artBox/lucydrawing.jpg"), //2
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/vaporWater.jpeg"),
+      map: boxLoader.load("artBox/lucy2.jpg"), //3
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/lucy3.jpg"), //4
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Dipping_Hot_Earth.jpg"), //5
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/IMG_0011.JPG"), //6
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Sunflower.png"), //7
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Warpspeed_Sweet_Angel.jpg"), //8
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/nicoledrawing.jpg"), //9
     }),
   ];
 
@@ -33,7 +47,29 @@ export function createArtBoxes() {
       }
     }
     const box = new THREE.Mesh(new THREE.BoxGeometry(6, 8, 1), panels);
-    box.position.set(Math.random() + x * 10, 4, 0);
+    if (x === 0) {
+      box.position.set(0, 4, -30);
+    } else if (x === 1) {
+      box.position.set(-15, 6, -15);
+    } else if (x === 2) {
+      box.position.set(10, 4, 20);
+    } else if (x === 3) {
+      box.position.set(25, 4, 10);
+    } else if (x === 4) {
+      box.position.set(18, 8, 30);
+    } else if (x === 5) {
+      box.position.set(40, 4, 60);
+    } else if (x === 6) {
+      box.position.set(50, 4, 40);
+    } else if (x === 7) {
+      box.position.set(45, 6, -20);
+    } else if (x === 8) {
+      box.position.set(50, 4, -40);
+    } else if (x === 9) {
+      box.position.set(-20, 4, 60);
+    } else {
+      box.position.set(Math.random() + x * 10, 4, 0);
+    }
     box.castShadow = true;
     box.receiveShadow = true;
     artBoxes.push(box);
