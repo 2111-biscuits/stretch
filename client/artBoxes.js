@@ -37,14 +37,50 @@ export function createArtBoxes(camera) {
     }),
   ];
 
+  const descriptions = [
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/CaraArtDesc.PNG"), //0
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/CaraArtDesc.PNG"), //1
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/LucyArtDesc.PNG"), //2
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/LucyArtDesc.PNG"), //3
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/LucyArtDesc.PNG"), //4
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //5
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //6
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //7
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //8
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/NicoleArtDesc.PNG"), //9
+    }),
+  ];
+
   for (let x = 0; x < art.length; x++) {
     let panels = [];
     for (let i = 1; i <= 6; i++) {
       if (i === 6) {
         panels.push(art[x]);
+      } else if (i === 5) {
+        panels.push(descriptions[x]);
       } else {
         panels.push(blankSide);
       }
+      console.log(panels);
     }
     const box = new THREE.Mesh(new THREE.BoxGeometry(6, 8, 1), panels);
     if (x === 0) {
