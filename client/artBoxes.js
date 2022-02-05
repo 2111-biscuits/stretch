@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export function createArtBoxes(camera) {
+export function createArtBoxes() {
   let artBoxes = [];
   const boxLoader = new THREE.TextureLoader();
   const blankSide = new THREE.MeshBasicMaterial({ color: 0xffffff });
