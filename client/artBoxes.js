@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export function createArtBoxes() {
+export function createArtBoxes(camera) {
   let artBoxes = [];
   const boxLoader = new THREE.TextureLoader();
   const blankSide = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -70,6 +70,7 @@ export function createArtBoxes() {
     } else {
       box.position.set(Math.random() + x * 10, 4, 0);
     }
+    box.name = `box_${x}`;
     box.castShadow = true;
     box.receiveShadow = true;
     artBoxes.push(box);
