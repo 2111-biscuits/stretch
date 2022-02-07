@@ -2,6 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import BasicCharacterControls from "../characterControls.js";
+import ClickBox from "../clickBox.js";
 import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
@@ -33,13 +34,11 @@ class Gallery extends React.Component {
 
     // loads the background
     const loader = new THREE.TextureLoader();
-    const texture = loader.load(
-      "resources/whitesands_pano2.jpg", () => {
-        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-        rt.fromEquirectangularTexture(world, texture);
-        scene.background = rt.texture;
-      }
-    );
+    const texture = loader.load("resources/whitesands_pano2.jpg", () => {
+      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+      rt.fromEquirectangularTexture(world, texture);
+      scene.background = rt.texture;
+    });
     //scene.background = texture;
 
     // light
@@ -65,7 +64,7 @@ class Gallery extends React.Component {
     const planeGeo = new THREE.PlaneGeometry(100, 100, 10, 10);
     const planeLoader = new THREE.TextureLoader();
     const planeMaterial = new THREE.MeshStandardMaterial({
-      map: planeLoader.load("resources/white-sand-floor.jpg")
+      map: planeLoader.load("resources/white-sand-floor.jpg"),
     });
     const plane = new THREE.Mesh(planeGeo, planeMaterial);
     plane.rotation.x = -Math.PI / 2; // makes it "on the floor"
@@ -77,6 +76,22 @@ class Gallery extends React.Component {
     const artBoxes = createArtBoxes();
     artBoxes.forEach((box) => scene.add(box));
     artBoxes.forEach((box) => art.push(box)); // pushes each artwork into the this.art array which is used to check for collisions
+
+    // initialize instance of class ClickBox, passing threejs scene and camera
+    const clickEvent = new ClickBox(scene, camera);
+
+    // add a handler on mouse click for mesh (or meshes) with the name 'box_x'
+    artBoxes.forEach((box) => {
+      clickEvent.addHandler(box.name, "click", function (mesh) {
+        //if mesh isn't already rotated, rotates mesh 180 degrees
+        if (mesh.rotation.y !== Math.PI) {
+          mesh.rotation.y = Math.PI;
+        } else {
+          //if mesh is already rotated, rotates back to 0 degrees
+          mesh.rotation.y = mesh.rotation.y - Math.PI;
+        }
+      });
+    });
 
     // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     let mixers = [];
@@ -95,7 +110,7 @@ class Gallery extends React.Component {
         target: fbxObj,
         art: art,
         scene,
-        camera, //possibly this.camera
+        camera,
       };
       controls = new BasicCharacterControls(params);
 
@@ -135,6 +150,8 @@ class Gallery extends React.Component {
       if (controls) {
         controls.Update(timeElapsedSeconds);
       }
+
+      clickEvent.update();
 
       if (characterCamera) {
         characterCamera.Update(timeElapsed);
