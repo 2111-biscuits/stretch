@@ -47,44 +47,34 @@ class BasicCharacterControls {
 
   _onKeyDown(event) {
     switch (event.keyCode) {
-      case 87: // w
+      case 38: // up arrow
         this._move.forward = true;
         break;
-      case 65: // a
+      case 37: // left arrow
         this._move.left = true;
         break;
-      case 83: // s
+      case 40: // down arrow
         this._move.backward = true;
         break;
-      case 68: // d
+      case 39: // right arrow
         this._move.right = true;
-        break;
-      case 38: // up
-      case 37: // left
-      case 40: // down
-      case 39: // right
         break;
     }
   }
 
   _onKeyUp(event) {
     switch (event.keyCode) {
-      case 87: // w
+      case 38: // up arrow
         this._move.forward = false;
         break;
-      case 65: // a
+      case 37: // left arrow
         this._move.left = false;
         break;
-      case 83: // s
+      case 40: // down arrow
         this._move.backward = false;
         break;
-      case 68: // d
+      case 39: // right arrow
         this._move.right = false;
-        break;
-      case 38: // up
-      case 37: // left
-      case 40: // down
-      case 39: // right
         break;
     }
   }

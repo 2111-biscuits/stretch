@@ -175,6 +175,9 @@ class Gallery extends React.Component {
       <div id="gallery">
         <div id="navbar">
           <Audio />
+          <span className="movement-directions">
+            use arrow keys to move | click objects to learn more
+          </span>
           <Link to="/">
             <button id="exit-button">Exit</button>
           </Link>
