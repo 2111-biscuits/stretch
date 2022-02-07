@@ -34,9 +34,6 @@ width: 100%;
   align-items: center;
   justify-content: space-between;
   margin: 15rem 0 15rem 0;
-
-
-
 }
 
 #enter-button {
@@ -69,6 +66,8 @@ width: 100%;
   z-index: 1;
   width: 97%;
   padding: 10px;
+  font-size: 12px;
+  font-family: monospace;
 }
 
 #3dworld {
@@ -109,4 +108,9 @@ a {
 #icon {
   width: 25px;
   height: 25px;
+}
+
+.movement-directions {
+  font-size: 12px;
+  font-family: monospace;
 }
