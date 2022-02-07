@@ -12,13 +12,13 @@ export function createArtBoxes() {
       map: boxLoader.load("artBox/cara_art2.JPG"), //1
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/lucydrawing.jpg"), //2
+      map: boxLoader.load("artBox/lucy_untitled.jpg"), //2
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/lucy2.jpg"), //3
+      map: boxLoader.load("artBox/ShallowCopy.jpg"), //3
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/lucy3.jpg"), //4
+      map: boxLoader.load("artBox/Octopus.jpg"), //4
     }),
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/Dipping_Hot_Earth.jpg"), //5
@@ -35,6 +35,9 @@ export function createArtBoxes() {
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/nicoledrawing.jpg"), //9
     }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Yooboo_art.JPG"), //10
+    }),
   ];
 
   const descriptions = [
@@ -45,28 +48,31 @@ export function createArtBoxes() {
       map: boxLoader.load("artBox/CaraArtDesc.PNG"), //1
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/LucyArtDesc.PNG"), //2
+      map: boxLoader.load("artBox/lucy_untitled_desc.JPG"), //2
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/LucyArtDesc.PNG"), //3
+      map: boxLoader.load("artBox/ShallowCopy_desc.JPG"), //3
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/LucyArtDesc.PNG"), //4
+      map: boxLoader.load("artBox/Octopus_desc.JPG"), //4
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //5
+      map: boxLoader.load("artBox/Dipping_Hot_Earth_desc.JPG"), //5
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //6
+      map: boxLoader.load("artBox/IMG_0011_desc.JPG"), //6
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //7
+      map: boxLoader.load("artBox/Sunflower_desc.PNG"), //7
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/GermanArtDesc.PNG"), //8
+      map: boxLoader.load("artBox/Warpspeed_Sweet_Angel_desc.JPG"), //8
     }),
     new THREE.MeshBasicMaterial({
-      map: boxLoader.load("artBox/NicoleArtDesc.PNG"), //9
+      map: boxLoader.load("artBox/nicoledrawing_desc.JPG"), //9
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Yooboo_desc.JPG"), //10
     }),
   ];
 
@@ -103,6 +109,8 @@ export function createArtBoxes() {
       box.position.set(50, 4, -40);
     } else if (x === 9) {
       box.position.set(-20, 4, 60);
+    } else if (x === 10) {
+      box.position.set(-10, 6, 50);
     } else {
       box.position.set(Math.random() + x * 10, 4, 0);
     }
