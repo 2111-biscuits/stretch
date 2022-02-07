@@ -14,18 +14,15 @@ body {
   height: 73em;
 }
 
-
-
 #top {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
-  margin: 30rem 0 0 0
-
+  justify-content: center;
+  margin: 30rem 0 0 0;
 }
 #top h1 {
-  font-size: 8rem
+  font-size: 8rem;
 }
 
 #bottom {
@@ -34,9 +31,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin: 15rem 0 15rem 0;
-
 }
-
 
 #enter-button {
   font-family: "Rowdies", cursive;
@@ -47,7 +42,7 @@ body {
   border-radius: 2em;
 }
 #artists {
-  width: 35rem
+  width: 35rem;
 }
 
 #gallery {
@@ -68,6 +63,8 @@ body {
   z-index: 1;
   width: 97%;
   padding: 10px;
+  font-size: 12px;
+  font-family: monospace;
 }
 
 #3dworld {
@@ -110,3 +107,7 @@ a {
   height: 25px;
 }
 
+.movement-directions {
+  font-size: 12px;
+  font-family: monospace;
+}
