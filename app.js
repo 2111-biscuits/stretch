@@ -11,5 +11,9 @@ app.get("*", (req, res) => {
 });
 
 http.listen(PORT, function () {
+<<<<<<< HEAD
   console.log("listening on *:HERE - origin set");
+=======
+  console.log("listening on *:here - origin set");
+>>>>>>> 16c05a2f570f664b4ba5ce69aeb0715a10034122
 });
