@@ -3,10 +3,10 @@ body,
 main {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    height: 100%;
-    margin: 0
-
+  height: 100%;
+  margin: 0;
 }
+
 #bg {
   height: 100vh;
   background-image: url("https://www.nationalparks.org/sites/default/files/whitesandsnm_hdr.jpg");
