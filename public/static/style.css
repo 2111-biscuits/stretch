@@ -1,7 +1,8 @@
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  /* width: auto; */
+
+
 }
 
 #landing {
@@ -10,10 +11,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-position: center center ;
+  background-size: cover;
   background-image: url("https://www.nationalparks.org/sites/default/files/whitesandsnm_hdr.jpg");
   width: 100%;
+  height: 100%;
 flex-wrap: wrap;
   flex: 0 1 auto;
+
 }
 
 #top {
@@ -21,7 +26,7 @@ flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 30rem 0 0 0;
+  margin: 12rem 0 0 0;
 }
 #top h1 {
   font-size: 8rem;
@@ -33,7 +38,7 @@ width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 15rem 0 15rem 0;
+  margin: 10rem 0 16rem 2rem;
 }
 
 #enter-button {
@@ -43,6 +48,8 @@ width: 100%;
   width: 8em;
   height: 3em;
   border-radius: 2em;
+  margin: 4rem 0 0 0
+
 }
 #artists {
   width: 35rem;
