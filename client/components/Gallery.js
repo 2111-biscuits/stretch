@@ -11,13 +11,11 @@ import { Link } from "react-router-dom";
 class Gallery extends React.Component {
   componentDidMount() {
     // renderer
-    let factor1 = 0.98; // percentage of the screen width
-    let factor2 = 0.96; // percentage of the screen height
     let world = new THREE.WebGL1Renderer();
     world.shadowMap.enabled = true;
     world.shadowMap.type = THREE.PCFSoftShadowMap; // shadows
     world.setPixelRatio(window.devicePixelRatio);
-    world.setSize(window.innerWidth * factor1, window.innerHeight * factor2); // sets scene width
+    world.setSize(window.innerWidth, window.innerHeight); // sets scene width
     let art = []; //used when we need to check if player is colliding with artwork
     this.mount.appendChild(world.domElement);
 
@@ -121,10 +119,9 @@ class Gallery extends React.Component {
     });
 
     const OnWindowResize = () => {
-      camera.aspect =
-        ((window.innerWidth * factor1) / window.innerHeight) * factor2;
+      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      world.setSize(window.innerWidth * factor1, window.innerHeight * factor2);
+      world.setSize(window.innerWidth, window.innerHeight);
     };
 
     const renderAnimationFrame = () => {
