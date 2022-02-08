@@ -86,7 +86,6 @@ export function createArtBoxes() {
       } else {
         panels.push(blankSide);
       }
-      console.log(panels);
     }
     const box = new THREE.Mesh(new THREE.BoxGeometry(6, 8, 1), panels);
     if (x === 0) {
