@@ -32,7 +32,7 @@ class Audio extends React.Component {
           <img src="pauseButton.png" id="icon" onClick={this.handleClick} />
           {this.state.text}
         </div>
-        <audio id="mySong" autoPlay={true} >
+        <audio id="mySong" autoPlay={true} loop={true} >
           <source src={this.audioURL} type="audio/mp3" />
         </audio>
       </div>
