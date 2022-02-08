@@ -5,10 +5,11 @@ main {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   height: 100%;
   margin: 0;
+  min-width: 1000px;
 }
 
 #bg {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url("https://www.nationalparks.org/sites/default/files/whitesandsnm_hdr.jpg");
   background-size: cover;
   background-position: center center;
@@ -54,15 +55,14 @@ main {
   width: 8em;
   height: 3em;
   border-radius: 2em;
-  margin: 4rem 0 0 0
-
+  margin: 4rem 0 0 0;
 }
 
 #artists {
   width: 35rem;
 }
 #dates {
-  margin-left: 5rem
+  margin-left: 5rem;
 }
 
 #gallery {
