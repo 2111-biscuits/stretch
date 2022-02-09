@@ -1,7 +1,17 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import { socket } from "../socket";
 
 class LandingPage extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    socket.emit("enter");
+  }
+
   render() {
     return (
       <div id="bg">
@@ -12,7 +22,9 @@ class LandingPage extends React.Component {
 
           <div id="middle">
             <Link to="/gallery">
-              <button id="enter-button">ENTER</button>
+              <button id="enter-button" onClick={this.handleClick}>
+                ENTER
+              </button>
             </Link>
           </div>
 

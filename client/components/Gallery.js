@@ -7,7 +7,7 @@ import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
 import { Link } from "react-router-dom";
-import socket from "socket.io-client"
+import { socket } from "../socket";
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -99,12 +99,6 @@ class Gallery extends React.Component {
     let characterCamera;
     let controls;
 
-
-    const playerSocket = socket(window.location.origin)
-
-    playerSocket.on('connect', () => {
-      console.log('connected to server')
-    })
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
@@ -183,7 +177,14 @@ class Gallery extends React.Component {
             use arrow keys to move | click objects to learn more
           </span>
           <Link to="/">
-            <button id="exit-button">Exit</button>
+            <button
+              id="exit-button"
+              onClick={() => {
+                socket.emit("leaveGallery");
+              }}
+            >
+              Exit
+            </button>
           </Link>
         </div>
         <div id="3dworld" ref={(ref) => (this.mount = ref)}></div>
