@@ -4,10 +4,10 @@ const path = require("path");
 const http = require("http").Server(app);
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 const server = http.listen(PORT, function () {

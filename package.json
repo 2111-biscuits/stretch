@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack -w & nodemon app.js",
+    "start": "webpack -w & nodemon server",
     "build": "webpack",
     "build-watch": "webpack -w"
   },
