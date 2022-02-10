@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Gallery from "./Gallery";
 import LandingPage from "./LandingPage";
 import AllArt from "./AllArt"
+import SingleArt from "./SingleArt"
 
 const Root = () => {
   return (

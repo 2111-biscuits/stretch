@@ -21,13 +21,13 @@ db.sync()
   })
 })
 
-const server = http.listen(PORT, function () {
-  console.log("listening on *:here - origin set");
-});
+// const server = http.listen(PORT, function () {
+//   console.log("listening on *:here - origin set");
+// });
 
-const io = require("socket.io")(server)
+// const io = require("socket.io")(server)
 
-io.on("connection", (socket) => {
-  console.log(`Connection from client ${socket.id}`);
+// io.on("connection", (socket) => {
+//   console.log(`Connection from client ${socket.id}`);
 
-});
+// });
