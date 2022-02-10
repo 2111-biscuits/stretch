@@ -183,7 +183,7 @@ class Gallery extends React.Component {
     return (
       <div id="gallery">
         <div id="navbar">
-          <Audio volume />
+          <Audio />
           <span className="movement-directions">
             use arrow keys to move | click objects to learn more
           </span>
