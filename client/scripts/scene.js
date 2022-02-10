@@ -105,15 +105,20 @@ class World {
     window.addEventListener(
       "resize",
       () => {
-        this.OnWindowResize();
+        this.onWindowResize();
       },
       false
     );
+
     // animation
     this.renderAnimationFrame();
   }
 
-  onWindowResize() {}
+  onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 
   renderAnimationFrame() {
     requestAnimationFrame((time) => {
