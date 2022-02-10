@@ -13,8 +13,9 @@ export const setAllArt = (allArt) => ({
 export const fetchAllArt = () => {
   return async (dispatch) => {
     try {
-      const { data: allArt } = await axios.get('/api/allArt');
-      dispatch(setAllArt(allArt));
+      const { data } = await axios.get('/api/artworks');
+      console.log(data, "DATA")
+      dispatch(setAllArt(data));
     } catch (e) {
       console.log("COULDN'T FETCH ARTWORKS", e);
     }

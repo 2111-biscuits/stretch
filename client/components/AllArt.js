@@ -7,6 +7,7 @@ class AllArt extends Component {
 
   componentDidMount() {
     this.props.fetchAllArt();
+    console.log(this.props)
   }
 
   render() {
