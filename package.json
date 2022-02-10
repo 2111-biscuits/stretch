@@ -1,8 +1,9 @@
-{
-  "scripts": {
+{ "name": "galleria",
+    "scripts": {
     "start": "webpack -w & nodemon app.js",
     "build": "webpack",
-    "build-watch": "webpack -w"
+    "build-watch": "webpack -w",
+    "seed": "node seed.js"
   },
   "dependencies": {
     "axios": "^0.25.0",
@@ -15,7 +16,13 @@
     "react-redux": "^7.2.6",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
+
     "redux": "^4.1.2",
+
+    "sequelize": "^6.16.1",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+
     "three": "^0.137.5"
   },
   "devDependencies": {
