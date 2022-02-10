@@ -14,14 +14,17 @@ const server = http.listen(PORT, function () {
   console.log("listening on *:here - origin set");
 });
 
+// setting up socket
 const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
-  console.log(`Connection from client ${socket.id}`);
+  console.log(
+    `Connection from client ${socket.id}! There are ${io.engine.clientsCount} peers connected`
+  );
 
   socket.on("enter", () => {
     socket.join("gallery");
-    console.log("socket is joining gallery");
+    console.log("socket " + socket.id + " is joining gallery");
   });
 
   socket.on("leaveGallery", () => {
