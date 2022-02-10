@@ -21,8 +21,9 @@ module.exports = db.define("art", {
   description: {
     type: Sequelize.TEXT
   },
-  owner: {
-    type: Sequelize.INTEGER
-  }
+  artistName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 
 })

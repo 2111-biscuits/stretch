@@ -1,17 +1,17 @@
-import axios from 'axios'
+import axios from "axios";
 
-const SET_SINGLE_ART = 'SET_SINGLE_ART';
+const SET_SINGLE_ART = "SET_SINGLE_ART";
 
 export const setSingleArt = (art) => ({
   type: SET_SINGLE_ART,
-  art,
+  art
 });
 
 export const fetchArt = (id) => {
   return async (dispatch) => {
     try {
-      const { data: art } = await axios.get(`/api/allArt/${id}`);
-      dispatch(setSingleArt(art));
+      const { data } = await axios.get(`/api/artworks/${id}`);
+      dispatch(setSingleArt(data));
     } catch (e) {
       console.log("COULDN'T FETCH SINGLE ART", e);
     }
@@ -19,11 +19,11 @@ export const fetchArt = (id) => {
 };
 
 //reducer
-export default (state = {}, action) => {
+export default function singleArtReducer(state = [], action) {
   switch (action.type) {
     case SET_SINGLE_ART:
-      return action.art
+      return action.art;
     default:
-      return state
+      return state;
   }
 }

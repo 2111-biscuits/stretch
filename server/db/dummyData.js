@@ -6,7 +6,8 @@ const arts = [
   medium: "paint",
   yearMade: 2021,
   description: "about love",
-  owner: 1
+  artistName: "jane doe",
+
 },
 ];
 const artists = [
@@ -14,7 +15,7 @@ const artists = [
     name: "jane doe",
     bio: "from ny",
     website: "www.me.com",
-    owner: 1
+
   }
 ];
 

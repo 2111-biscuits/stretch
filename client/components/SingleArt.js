@@ -1,43 +1,50 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchArt } from '../store';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchArt } from "../store";
+import { Link, useParams } from "react-router-dom";
 
-class SingleArt extends Component {
+
+// function Child() {
+//   //We can use the `useParams` hook here to access
+//   // the dynamic pieces of the URL.
+//   let { id } = useParams();
+
+//   return (
+//     <div>
+//       <h2>Item ID: {id}</h2>
+//     </div>
+//   );
+// }
+
+class SingleArt extends React.Component {
+
   componentDidMount() {
-    const artId = this.props.match.params.artId;
-    this.props.fetchArt(artId);
+    // this.props.fetchArt(this.props.match.params.id);
+    const {id} = useParams()
+    console.log(id)
+    // console.log(this.props)
   }
   render() {
-    const { art } = this.props || {};
+
     return (
       <div className="container">
-        {allArt.map((art) => (
-          <div className="card" key={art.id}>
-            <div className="card-header">
-              <div className="card-content">
-                <img src={art.image} />
-                <h4>{art.name}</h4>
-                <h4>{art.dimensions}</h4>
-                <h4>{art.medium}</h4>
-                <h4>{art.year}</h4>
-                <h4>{art.description}</h4>
-              </div>
-            </div>
-          </div>
-        ))}
+        {/* <img src={art.image} />
+        <h4>{art.title}</h4>
+        <h4>{art.dimensions}</h4>
+        <h4>{art.medium}</h4>
+        <h4>{art.yearMade}</h4>
+        <h4>{art.description}</h4> */}
       </div>
-    )
+    );
   }
 }
 
 const mapState = (state) => ({
-  art: state.art,
+  art: state
 });
 
-const mapDispatch = (dispatch, { history }) => ({
-  fetchArt: (id) => dispatch(fetchArt(id)),
+const mapDispatch = (dispatch) => ({
+  fetchArt: (id) => dispatch(fetchArt(id))
 });
 
 export default connect(mapState, mapDispatch)(SingleArt);
-

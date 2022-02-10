@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const pkg = require("../package.json");
+const pkg = require("../../package.json");
 
 const dbName = process.env.NODE_ENV === "test" ? `${pkg.name}-test` : pkg.name;
 console.log(`Opening database connection to ${dbName}`);

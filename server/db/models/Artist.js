@@ -12,7 +12,5 @@ module.exports = db.define("artist", {
   website: {
     type: Sequelize.TEXT
   },
-  owner: {
-    type: Sequelize.INTEGER
-  }
+
 });

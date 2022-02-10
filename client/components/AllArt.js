@@ -4,10 +4,12 @@ import { connect } from "react-redux"
 import { fetchAllArt } from "../store/allArt"
 
 class AllArt extends Component {
-
+constructor(props) {
+  super(props)
+}
   componentDidMount() {
     this.props.fetchAllArt();
-    console.log(this.props)
+    console.log(this.props, "all art")
   }
 
   render() {
@@ -18,12 +20,14 @@ class AllArt extends Component {
           <div className="card" key={art.id}>
             <div className="card-header">
               <div className="card-content">
-                <Link to={`/allArt/${art.id}`}>
+                <Link to={`/artworks/${art.id}`}>
                   <img src={art.image} />
                 </Link>
-                <h4>{art.name}</h4>
-                <h4>{art.artistId}</h4>
-                <h4>{art.year}</h4>
+                <h4>{art.title}</h4>
+                <h4>{art.dimensions}</h4>
+                <h4>{art.medium}</h4>
+                <h4>{art.yearMade}</h4>
+                <h4>{art.description}</h4>
               </div>
             </div>
           </div>
