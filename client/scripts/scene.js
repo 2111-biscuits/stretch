@@ -4,6 +4,8 @@ import { createArtBoxes } from "./sceneHelpers/artBoxes";
 import ClickBox from "./sceneHelpers/clickBox";
 import ThirdPersonCamera from "./sceneHelpers/thirdPersonCam";
 import BasicCharacterControls from "./sceneHelpers/characterControls";
+import { socket } from "../socket";
+import Player from "./player";
 
 class World {
   constructor(reference) {
@@ -16,11 +18,19 @@ class World {
     reference.appendChild(this.renderer.domElement);
 
     // variables we'll need
+    this.player;
     this.art = []; //used when we need to check if player is colliding with artwork
     this.mixers = []; // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
     this.previousRenderFrame; // created a previous render frame variable to hold elapsed time
     this.characterCamera;
     this.controls;
+    this.remotePlayers = [];
+    this.remoteColliders = [];
+    this.initialisingPlayers = [];
+    this.remoteData = [];
+
+    // clock for delta
+    this.clock = new THREE.Clock();
 
     // camera
     const fov = 60; // field of view
@@ -81,25 +91,27 @@ class World {
       });
     });
 
-    // loading the fbx file of the player model
-    const fbxLoader = new FBXLoader();
-    fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
-      fbxObj.scale.set(0.0015, 0.0015, 0.0015); // scales down the fbx object
-      fbxObj.position.set(22, 1, -75);
+    // loading the fbx file of the player model, creating controls + third person camera
+    const geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+    const cube = new THREE.Mesh(geometry, material);
 
-      const params = {
-        target: fbxObj,
-        art: this.art,
-        scene: this.scene,
-        camera: this.camera,
-      };
-      this.controls = new BasicCharacterControls(params);
+    this.player = cube;
 
-      // adding the animated fbx file to the scene
-      this.scene.add(fbxObj);
-      const camParams = { camera: this.camera, target: this.controls };
-      this.characterCamera = new ThirdPersonCamera(camParams);
-    });
+    this.player.position.set(22, 1, -75);
+    this.scene.add(this.player);
+
+    const controlParams = {
+      target: this.player,
+      art: this.art,
+      scene: this.scene,
+      camera: this.camera,
+    };
+
+    this.controls = new BasicCharacterControls(controlParams);
+
+    const camParams = { camera: this.camera, target: this.controls };
+    this.characterCamera = new ThirdPersonCamera(camParams);
 
     // handles resizing
     window.addEventListener(
@@ -114,12 +126,14 @@ class World {
     this.renderAnimationFrame();
   }
 
+  // handling resize
   onWindowResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
+  // rendering
   renderAnimationFrame() {
     requestAnimationFrame((time) => {
       if (this.previousRenderFrame === null) {
@@ -135,8 +149,11 @@ class World {
     });
   }
 
+  //updating
   stepIntoNextFrame(timeElapsed) {
     const timeElapsedSeconds = timeElapsed * 0.001;
+    this.frameCount++;
+
     if (this.mixers) {
       this.mixers.map((mixer) => mixer.update(timeElapsedSeconds));
     }
