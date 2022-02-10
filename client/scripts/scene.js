@@ -1,8 +1,9 @@
 import * as THREE from "three";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { createArtBoxes } from "./sceneHelpers/artBoxes";
 import ClickBox from "./sceneHelpers/clickBox";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import ThirdPersonCamera from "./sceneHelpers/thirdPersonCam";
+import BasicCharacterControls from "./sceneHelpers/characterControls";
 
 class World {
   constructor(reference) {
@@ -65,11 +66,11 @@ class World {
     artBoxes.forEach((box) => this.art.push(box)); // pushes each artwork into the this.art array which is used to check for collisions
 
     // initialize instance of class ClickBox, passing threejs scene and camera
-    const clickEvent = new ClickBox(this.scene, this.camera);
+    this.clickEvent = new ClickBox(this.scene, this.camera);
 
     // add a handler on mouse click for mesh (or meshes) with the name 'box_x'
     artBoxes.forEach((box) => {
-      clickEvent.addHandler(box.name, "click", function (mesh) {
+      this.clickEvent.addHandler(box.name, "click", function (mesh) {
         //if mesh isn't already rotated, rotates mesh 180 degrees
         if (mesh.rotation.y !== Math.PI) {
           mesh.rotation.y = Math.PI;
@@ -112,6 +113,8 @@ class World {
     this.renderAnimationFrame();
   }
 
+  onWindowResize() {}
+
   renderAnimationFrame() {
     requestAnimationFrame((time) => {
       if (this.previousRenderFrame === null) {
@@ -136,7 +139,7 @@ class World {
       this.controls.Update(timeElapsedSeconds);
     }
 
-    clickEvent.update();
+    this.clickEvent.update();
 
     if (this.characterCamera) {
       this.characterCamera.Update(timeElapsed);
