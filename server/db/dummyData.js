@@ -1,35 +1,133 @@
 const arts = [
-{
-  title: "hi",
-  image: "/artBox/cara_art.JPG",
-  dimensions: "10in x 10in",
-  medium: "paint",
-  yearMade: 2021,
-  description: "about love",
-  artistName: "jane doe",
-
-},
-{
-  title: "hello world",
-  image: "/artBox/cara_art2.JPG",
-  dimensions: "10in x 10in",
-  medium: "paint",
-  yearMade: 2022,
-  description: "about hate",
-  artistName: "jane doe",
-
-}
+  {
+    title: "Untitled",
+    image: "/artBox/cara_art.JPG",
+    dimensions: "10in x 10in",
+    medium: "Black ink on paper",
+    yearMade: 2021,
+    description: "about love",
+    artistName: "Cara Dodge",
+  },
+  {
+    title: "hi",
+    image: "/artBox/cara_art2.JPG",
+    dimensions: "10in x 10in",
+    medium: "Black ink on paper",
+    yearMade: 2021,
+    description: "about love",
+    artistName: "Cara Dodge",
+  },
+  {
+    title: "Untitled",
+    image: "/artBox/lucy_untitled.jpg",
+    dimensions: "10in x 10in",
+    medium: "Oil pastel on paper",
+    yearMade: 2022,
+    description: "A meticulously crafted masterpiece",
+    artistName: "Lucy Blagg",
+  },
+  {
+    title: "Shallow Copy",
+    image: "/artBox/ShallowCopy.jpg",
+    dimensions: "12in x 18in",
+    medium: "Mixed media on paper",
+    yearMade: 2021,
+    description: "Beautifully crafted collage",
+    artistName: "Lucy Blagg",
+  },
+  {
+    title: "Octopus",
+    image: "/artBox/Octopus.jpg",
+    dimensions: "12in x 18in",
+    medium: "Mixed media on paper",
+    yearMade: 2021,
+    description: "Beautifully crafted collage",
+    artistName: "Lucy Blagg",
+  },
+  {
+    title: "Dipping Hot Earth",
+    image: "/artBox/Dipping_Hot_Earth.jpg",
+    dimensions: "36in x 48in",
+    medium: "Acrylic paint on canvas",
+    yearMade: 2020,
+    description: "Ambiguous butterfly motif leaving a scorched planet behind",
+    artistName: "German Caceres",
+  },
+  {
+    title: "Untitled",
+    image: "/artBox/IMG_0011.JPG",
+    dimensions: "36in x 48in",
+    medium: "Acrylic paint on canvas",
+    yearMade: 2020,
+    description: "Golden, geometric angel",
+    artistName: "German Caceres",
+  },
+  {
+    title: "Sunflower",
+    image: "/artBox/Sunflower.png",
+    dimensions: "36in x 48in",
+    medium: "Colored pencil on paper",
+    yearMade: 2021,
+    description: "Whimsical sunflower",
+    artistName: "German Caceres",
+  },
+  {
+    title: "Warpspeed (Sweet Angel)",
+    image: "/artBox/Warpspeed_Sweet_Angel.jpg",
+    dimensions: "36in x 48in",
+    medium: "Acrylic paint on canvas",
+    yearMade: 2020,
+    description: "Angelic painting",
+    artistName: "German Caceres",
+  },
+  {
+    title: "Long Faces",
+    image: "/artBox/nicoledrawing.jpg",
+    dimensions: "12in x 18in",
+    medium: "Ink on paper",
+    yearMade: 2015,
+    description: "A conglomerate of disturbing figures",
+    artistName: "Nicole DeSantis",
+  },
+  {
+    title: "Untitled",
+    image: "/artBox/Yooboo_art.JPG",
+    dimensions: "24in x 18in",
+    medium: "Acrylic paint on canvas",
+    yearMade: 2016,
+    description: "Beautiful flowers in a field",
+    artistName: "Yooboo Park",
+  },
 ];
 const artists = [
   {
-    name: "jane doe",
-    bio: "from ny",
-    website: "www.me.com",
-
-  }
+    name: "Cara Dodge",
+    bio: "Cara got her start at art in beautiful Miami, Florida before heading north to New York City. Their pieces are currently on display in Los Angeles, Tokyo, and London.",
+    website: "www.cara.com",
+  },
+  {
+    name: "Lucy Blagg",
+    bio: "Lucy has been practicing art for several years. The fresh, sea air that she has the pleasure of experiencing in Rhode Island serves as her muse.",
+    website: "www.lucy.com",
+  },
+  {
+    name: "German Caceres",
+    bio: "German Caceres is a multimedia artist from Miami, Florida. He is the co-creator of Midnight Thrift, “Miami’s first nightlife store”",
+    website: "https://germancaceres.tumblr.com/work",
+  },
+  {
+    name: "Nicole DeSantis",
+    bio: "Nicole starting drawing at a young age and hasn't put the pencil down since. She is currently experimenting with watercolors.",
+    website: "www.nicole.com",
+  },
+  {
+    name: "Yooboo Park",
+    bio: "Yooboo Park's art has received rave reviews across America. Crowds flock to see her latest work and she is very excited to share her work in Galleria!",
+    website: "www.yooboo.com",
+  },
 ];
 
 module.exports = {
   arts,
-  artists
+  artists,
 };
