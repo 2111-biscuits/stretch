@@ -7,7 +7,6 @@ import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
 import { Link } from "react-router-dom";
-import socket from "socket.io-client";
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -141,13 +140,30 @@ class Gallery extends React.Component {
     let characterCamera;
     let controls;
 
-    const playerSocket = socket(window.location.origin);
-
-    playerSocket.on("connect", () => {
-      console.log("connected to server");
-    });
-    // loading the fbx file of the player model
+    // fbx loader
     const fbxLoader = new FBXLoader();
+
+    // adding sculptures
+    const sculpturePaths = [
+      "./resources/sculptures/archer.fbx",
+      "./resources/sculptures/capricorntest.fbx",
+      "./resources/sculptures/libra.fbx",
+      "./resources/sculptures/pot.fbx",
+    ];
+    const xVals = [10, 110, 60, -100];
+    const yVals = [4, 8, 6, 5];
+    const zVals = [60, 20, 70, -20];
+
+    sculpturePaths.forEach((sculpturePath, idx) =>
+      fbxLoader.load(sculpturePath, (sculpture) => {
+        sculpture.scale.set(0.25, 0.25, 0.25);
+        sculpture.position.set(xVals[idx], yVals[idx], zVals[idx]);
+        scene.add(sculpture);
+        art.push(sculpture);
+      })
+    );
+
+    // adding the character
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
       fbxObj.scale.set(0.0015, 0.0015, 0.0015); // scales down the fbx object
       fbxObj.position.set(22, 1, -75);
