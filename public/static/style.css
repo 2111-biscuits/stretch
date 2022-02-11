@@ -1,11 +1,49 @@
 html,
 body,
-main {
+main{
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   height: 100%;
   margin: 0;
   min-width: 1000px;
+}
+
+select {
+  margin: 4rem 0 0 0;
+  font-family: "Rowdies", cursive;
+  height: 100%;
+}
+
+.skyblue {
+  background-color: skyblue
+}
+
+.darkorchid {
+  background-color: darkorchid
+}
+
+.lightpink {
+  background-color: lightpink
+}
+
+.crimson {
+  background-color: crimson
+}
+
+.darkorange {
+  background-color: darkorange;
+}
+
+.gold {
+  background-color: gold
+}
+
+.limegreen {
+  background-color: limegreen
+}
+
+.turquoise {
+  background-color: turquoise
 }
 
 #bg {
@@ -39,6 +77,7 @@ main {
   font-size: 8rem;
 }
 
+
 #bottom {
   width: 100%;
   display: flex;
@@ -55,7 +94,7 @@ main {
   width: 8em;
   height: 3em;
   border-radius: 2em;
-  margin: 4rem 0 0 0;
+  margin: 3rem 0 0 0;
 }
 
 #artists {

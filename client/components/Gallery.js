@@ -7,9 +7,13 @@ import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setOrbColor } from "../store/filter";
+
 
 class Gallery extends React.Component {
   componentDidMount() {
+    let orbColor = this.props.orbColor.Color;
     // renderer
     let world = new THREE.WebGL1Renderer();
     world.shadowMap.enabled = true;
@@ -167,6 +171,9 @@ class Gallery extends React.Component {
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
       fbxObj.scale.set(0.0015, 0.0015, 0.0015); // scales down the fbx object
       fbxObj.position.set(22, 1, -75);
+      if (orbColor !== "default") {
+        fbxObj.children[0].material.color.set(orbColor);
+      }
 
       const params = {
         target: fbxObj,
@@ -228,6 +235,10 @@ class Gallery extends React.Component {
     renderAnimationFrame();
   }
 
+  componentWillUnmount() {
+    this.props.setOrb("default");
+  }
+
   render() {
     return (
       <div id="gallery">
@@ -246,7 +257,19 @@ class Gallery extends React.Component {
   }
 }
 
-export default Gallery;
+const mapState = (state) => {
+  return {
+    orbColor: state.filter,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    setOrb: (color) => dispatch(setOrbColor(color)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Gallery);
 
 //reference for nightBox changing texture click event:
 //https://codepen.io/dipscom/pen/MpGYrq?editors=0010
