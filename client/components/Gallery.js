@@ -7,8 +7,6 @@ import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
 import { Link } from "react-router-dom";
-import socket from "socket.io-client"
-
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -29,10 +27,10 @@ class Gallery extends React.Component {
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.set(25, 0, 0);
 
-//     let control = new OrbitControls(camera, world.domElement);
-//     control.addEventListener('change', world);
-//     window.minDistance = 5;
-//     control.maxDistance = 30;
+    //     let control = new OrbitControls(camera, world.domElement);
+    //     control.addEventListener('change', world);
+    //     window.minDistance = 5;
+    //     control.maxDistance = 30;
     // scene
     let scene = new THREE.Scene(); // container for everything in the scene
 
@@ -104,12 +102,6 @@ class Gallery extends React.Component {
     let characterCamera;
     let controls;
 
-
-    const playerSocket = socket(window.location.origin)
-
-    playerSocket.on('connect', () => {
-      console.log('connected to server')
-    })
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {

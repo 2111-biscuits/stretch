@@ -188,7 +188,7 @@ export function createArtBoxes() {
     }),
   ];
 
-  // random x number between -20 and 50
+  // random x number between -100 and 100
   let xVals = [
     92, -15, -6, -21, -76, -59, 48, -85, 57, 76, -45, 18, 39, -56, -16, -30, 74,
     -29, 74, 63, -21, 5, -59, 94, 56,
@@ -203,7 +203,6 @@ export function createArtBoxes() {
     -4, 35, -12, 6, -12, 24, -27, -10, 29, -8, 58, -15, 27, 17, -20, 24, 31, 53,
     20, -19, -13, 35, -7, -6, 11,
   ];
-  // generate random y number between 4 and 8
 
   for (let x = 0; x < art.length; x++) {
     let panels = [];
