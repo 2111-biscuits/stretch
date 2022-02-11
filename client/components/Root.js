@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Gallery from "./Gallery";
 import LandingPage from "./LandingPage";
 import AllArt from "./AllArt"
-import SingleArt from "./SingleArt"
+import SingleArt from "./SingleArtFunc"
 import AboutUs from "./AboutUs";
 
 const Root = () => {
@@ -13,7 +13,7 @@ const Root = () => {
       <Route index element={<LandingPage />} />
       <Route path="/gallery" element={<Gallery />} />
       <Route path="/artworks" element={<AllArt />} />
-      <Route path="/artworks/:artId" element={<SingleArt />} />
+      <Route path="/artworks/:id" element={<SingleArt />} />
       <Route path="/aboutUs" element={<AboutUs />} />
     </Routes>
   );

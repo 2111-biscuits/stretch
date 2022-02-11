@@ -1,22 +1,24 @@
-const {db} = require("./db");
-const { arts, artists } = require("./db/dummyData");
-const Artist = require("./db/models/Artist");
-const Art = require("./db/models/Art");
+const {db} = require("./server/db");
+const { arts, artists } = require("./server/db/dummyData");
+const Artist = require("./server/db/models/Artist");
+const Art = require("./server/db/models/Art");
 
 const seed = async () => {
   try {
     await db.sync({ force: true });
 
-    await Promise.all(
+    const art = await Promise.all(
       arts.map((art) => {
         return Art.create(art);
       })
     );
-    await Promise.all(
+    const artist = await Promise.all(
       artists.map((artist) => {
         return Artist.create(artist);
       })
     );
+    await art[0].setArtist(artist[0])
+    await art[1].setArtist(artist[0])
   } catch (err) {
     console.log(err);
   }
