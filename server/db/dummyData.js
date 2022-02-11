@@ -1,7 +1,7 @@
 const arts = [
 {
   title: "hi",
-  image: "./artBox/cara_art.JPG",
+  image: "/artBox/cara_art.JPG",
   dimensions: "10in x 10in",
   medium: "paint",
   yearMade: 2021,
@@ -9,6 +9,16 @@ const arts = [
   artistName: "jane doe",
 
 },
+{
+  title: "hello world",
+  image: "/artBox/cara_art2.JPG",
+  dimensions: "10in x 10in",
+  medium: "paint",
+  yearMade: 2022,
+  description: "about hate",
+  artistName: "jane doe",
+
+}
 ];
 const artists = [
   {

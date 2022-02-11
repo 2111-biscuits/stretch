@@ -18,6 +18,7 @@ const seed = async () => {
       })
     );
     await art[0].setArtist(artist[0])
+    await art[1].setArtist(artist[0])
   } catch (err) {
     console.log(err);
   }
