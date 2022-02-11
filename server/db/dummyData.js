@@ -1,6 +1,6 @@
 const arts = [
   {
-    title: "Untitled",
+    title: "Lizard People",
     image: "/artBox/cara_art.JPG",
     dimensions: "10in x 10in",
     medium: "Black ink on paper",
@@ -9,7 +9,7 @@ const arts = [
     artistName: "Cara Dodge",
   },
   {
-    title: "hi",
+    title: "Bent Thru",
     image: "/artBox/cara_art2.JPG",
     dimensions: "10in x 10in",
     medium: "Black ink on paper",
@@ -98,12 +98,48 @@ const arts = [
     description: "Beautiful flowers in a field",
     artistName: "Yooboo Park",
   },
+  {
+    title: "Fallen",
+    image: "/artBox/",
+    dimensions: "8in x 10in",
+    medium: "Black ink on paper",
+    yearMade: 2021,
+    description: "The sensual tension of desire; the piece tries to convey the assaulting energy of wanting.",
+    artistName: "Cara Dodge",
+  },
+  {
+    title: "Self-portrait",
+    image: "/artBox/",
+    dimensions: "8in x 10in",
+    medium: "Black ink on paper",
+    yearMade: 2021,
+    description: "Artist's self portrait as a stereotype",
+    artistName: "Cara Dodge",
+  },
+  {
+    title: "Revelation",
+    image: "/artBox/",
+    dimensions: "8in x 10in",
+    medium: "Black ink on paper",
+    yearMade: 2021,
+    description: "Inspired by the experience of divinity and the personal interaction of destiny.",
+    artistName: "Cara Dodge",
+  },
+  {
+    title: "Mirror",
+    image: "/artBox/",
+    dimensions: "8in x 10in",
+    medium: "Black ink on paper",
+    yearMade: 2021,
+    description: "Artist's self-portrait on the uprooting nature of dysmorphia.",
+    artistName: "Cara Dodge",
+  },
 ];
 const artists = [
   {
     name: "Cara Dodge",
-    bio: "Cara got her start at art in beautiful Miami, Florida before heading north to New York City. Their pieces are currently on display in Los Angeles, Tokyo, and London.",
-    website: "www.cara.com",
+    bio: "Cara Dodge is a multi-media & performance artist from Miami, Florida. They are co-founder of Theater of the Electric Mouth, a recent recipient of the O, Miami Poetry Grant, and current graduate of the Grace Hopper Program at Fullstack Academy.",
+    website: "instagram.com/dedcooter",
   },
   {
     name: "Lucy Blagg",

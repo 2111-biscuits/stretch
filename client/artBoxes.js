@@ -38,6 +38,62 @@ export function createArtBoxes() {
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/Yooboo_art.JPG"), //10
     }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Eclipse.jpg"), //11
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_NightCar.jpg"), //12
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection1.jpg"), //13
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection5.jpg"), //14
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection7.jpg"), //15
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Snow.jpg"), //16
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_ThreeTrees.jpg"), //17
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Window.jpg"), //18
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Headache.jpg"), //19
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Untitled.jpg"), //20
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/TerryPark_Germs.jpg"), //21
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_PortlandLobster.jpg"), //22
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_RedTurbulence.jpg"), //23
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_Untitled.jpg"), //24
+    }),
   ];
 
   const descriptions = [
@@ -74,6 +130,78 @@ export function createArtBoxes() {
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/Yooboo_desc.JPG"), //10
     }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Eclipse_Info.png"), //11
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_NightCar_Info.png"), //12
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection1_Info.png"), //13
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection5_Info.png"), //14
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection7_Info.png"), //15
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Snow_Info.png"), //16
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_ThreeTrees_Info.png"), //17
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Window_Info.png"), //18
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Headache_Info.png"), //19
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Untitled_Info.png"), //20
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/TerryPark_Germs_Info.png"), //21
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_PortlandLobster_Info.png"), //22
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_RedTurbulence_Info.png"), //23
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_Untitled_Info.png"), //24
+    }),
+  ];
+
+  // random x number between -100 and 100
+  let xVals = [
+    92, -15, -6, -21, -76, -59, 48, -85, 57, 76, -45, 18, 39, -56, -16, -30, 74,
+    -29, 74, 63, -21, 5, -59, 94, 56,
+  ];
+  // random y number between 4 and 6
+  let yVals = [
+    4, 5, 4, 5, 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 5, 4, 5, 5, 5, 5, 5, 5, 5,
+  ];
+  // random z number between -40 & 60
+
+  let zVals = [
+    -4, 35, -12, 6, -12, 24, -27, -10, 29, -8, 58, -15, 27, 17, -20, 24, 31, 53,
+    20, -19, -13, 35, -7, -6, 11,
   ];
 
   for (let x = 0; x < art.length; x++) {
@@ -88,35 +216,13 @@ export function createArtBoxes() {
       }
     }
     const box = new THREE.Mesh(new THREE.BoxGeometry(6, 8, 1), panels);
-    if (x === 0) {
-      box.position.set(0, 4, -30);
-    } else if (x === 1) {
-      box.position.set(-15, 6, -15);
-    } else if (x === 2) {
-      box.position.set(10, 4, 20);
-    } else if (x === 3) {
-      box.position.set(25, 4, 10);
-    } else if (x === 4) {
-      box.position.set(18, 8, 30);
-    } else if (x === 5) {
-      box.position.set(40, 4, 60);
-    } else if (x === 6) {
-      box.position.set(50, 4, 40);
-    } else if (x === 7) {
-      box.position.set(45, 6, -20);
-    } else if (x === 8) {
-      box.position.set(50, 4, -40);
-    } else if (x === 9) {
-      box.position.set(-20, 4, 60);
-    } else if (x === 10) {
-      box.position.set(-10, 6, 50);
-    } else {
-      box.position.set(Math.random() + x * 10, 4, 0);
-    }
+    box.position.set(xVals[x], yVals[x], zVals[x]);
+
     box.name = `box_${x}`;
     box.castShadow = true;
     box.receiveShadow = true;
     artBoxes.push(box);
   }
+
   return artBoxes;
 }
