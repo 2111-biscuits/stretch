@@ -150,9 +150,9 @@ class Gallery extends React.Component {
       "./resources/sculptures/libra.fbx",
       "./resources/sculptures/pot.fbx",
     ];
-    const xVals = [10, 100, 60, -100];
+    const xVals = [10, 110, 60, -100];
     const yVals = [4, 8, 6, 5];
-    const zVals = [30, 20, 10, -20];
+    const zVals = [60, 20, 70, -20];
 
     sculpturePaths.forEach((sculpturePath, idx) =>
       fbxLoader.load(sculpturePath, (sculpture) => {
