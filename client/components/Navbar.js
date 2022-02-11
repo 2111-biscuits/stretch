@@ -5,10 +5,13 @@ const Navbar = () => {
   return (
     <div class="navbar">
       <div class="dropdown">
-        <button class="dropbtn">About</button>
+        <button class="dropbtn">
+          <img id="navbar-icon" src="./resources/navbar.png" />
+        </button>
         <div class="dropdown-content">
+          <Link to="/">Home</Link>
           <Link to="/artworks">Current Exhibition</Link>
-          <Link to="/aboutUs">Our Team</Link>
+          <Link to="/aboutUs">About Us</Link>
         </div>
       </div>
     </div>

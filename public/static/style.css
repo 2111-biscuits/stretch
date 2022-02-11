@@ -168,20 +168,23 @@ a {
 .navbar {
   padding: 25px;
   align-self: flex-start;
+  background-color: none;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-bottom: 15px;
 }
 
 .dropbtn {
-  text-align: left;
-  font-family: "Rowdies", cursive;
-  width: 157px;
-  background-color: #fffffb;
   border: none;
-  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#navbar-icon {
+  width: 35px;
+  height: 35px;
 }
 
 .dropdown-content {
