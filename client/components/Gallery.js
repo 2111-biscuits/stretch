@@ -7,8 +7,7 @@ import { createArtBoxes } from "../artBoxes.js";
 import ThirdPersonCamera from "../thirdPersonCam.js";
 import Audio from "./Audio.js";
 import { Link } from "react-router-dom";
-import socket from "socket.io-client"
-
+import socket from "socket.io-client";
 
 class Gallery extends React.Component {
   componentDidMount() {
@@ -19,6 +18,7 @@ class Gallery extends React.Component {
     world.setPixelRatio(window.devicePixelRatio);
     world.setSize(window.innerWidth, window.innerHeight); // sets scene width
     let art = []; //used when we need to check if player is colliding with artwork
+    let night = false;
     this.mount.appendChild(world.domElement);
 
     // camera
@@ -37,13 +37,12 @@ class Gallery extends React.Component {
     let scene = new THREE.Scene(); // container for everything in the scene
 
     // loads the background
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load("resources/whitesands_pano2.jpg", () => {
-      const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+    let loader = new THREE.TextureLoader();
+    let texture = loader.load("resources/whitesands_pano2.jpg", () => {
+      let rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
       rt.fromEquirectangularTexture(world, texture);
       scene.background = rt.texture;
     });
-    //scene.background = texture;
 
     // light
     let light = new THREE.DirectionalLight(0xffffff);
@@ -64,22 +63,34 @@ class Gallery extends React.Component {
     light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
 
-    // creating "floor" + adding it to scene
-    const planeGeo = new THREE.PlaneGeometry(100, 100, 10, 10);
-    const planeLoader = new THREE.TextureLoader();
-    const planeMaterial = new THREE.MeshStandardMaterial({
-      map: planeLoader.load("resources/white-sand-floor.jpg"),
-    });
-    const plane = new THREE.Mesh(planeGeo, planeMaterial);
-    plane.rotation.x = -Math.PI / 2; // makes it "on the floor"
-    plane.castShadow = false;
-    plane.receiveShadow = true;
-    //scene.add(plane);
-
     //adding the art to the scene
     const artBoxes = createArtBoxes();
     artBoxes.forEach((box) => scene.add(box));
     artBoxes.forEach((box) => art.push(box)); // pushes each artwork into the this.art array which is used to check for collisions
+
+    //creating box for night-mode
+    let nightBoxLoader = new THREE.TextureLoader();
+    let arr = ["resources/night.PNG", "resources/light.PNG"];
+    let textureToShow = 0;
+    let nightBoxTexture = new THREE.MeshBasicMaterial();
+    let nightBox = new THREE.Mesh(
+      new THREE.BoxGeometry(10, 10, 10),
+      nightBoxTexture
+    );
+    nightBox.position.set(150, 20, 250);
+    nightBox.name = "nightbox";
+    nightBox.castShadow = true;
+    nightBox.receiveShadow = true;
+
+    nightBoxLoader.load(arr[textureToShow], function (tex) {
+      // Once the texture has loaded
+      // Asign it to the material
+      nightBoxTexture.map = tex;
+      // Update the next texture to show
+      textureToShow++;
+      // Add the mesh into the scene
+      scene.add(nightBox);
+    });
 
     // initialize instance of class ClickBox, passing threejs scene and camera
     const clickEvent = new ClickBox(scene, camera);
@@ -97,19 +108,44 @@ class Gallery extends React.Component {
       });
     });
 
-    // create this 'mixers' array to be mapped over & updated in renderAnimationFrame
-    let mixers = [];
+    clickEvent.addHandler("nightbox", "click", function () {
+      if (!night) {
+        loader = new THREE.TextureLoader();
+        texture = loader.load("resources/UnearthlyRed4k.png", () => {
+          let rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+          rt.fromEquirectangularTexture(world, texture);
+          scene.background = rt.texture;
+        });
+      } else {
+        loader = new THREE.TextureLoader();
+        texture = loader.load("resources/whitesands_pano2.jpg", () => {
+          let rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+          rt.fromEquirectangularTexture(world, texture);
+          scene.background = rt.texture;
+        });
+      }
+      nightBoxLoader = new THREE.TextureLoader();
+      nightBoxLoader.load(arr[textureToShow], function (tex) {
+        nightBoxTexture.map = tex;
+        textureToShow++;
+        // Have we got to the end of the textures array
+        if (textureToShow > arr.length - 1) {
+          textureToShow = 0;
+        }
+      });
+      night = !night;
+    });
+
     // created a previous render frame variable to hold elapsed time
     let previousRenderFrame;
     let characterCamera;
     let controls;
 
+    const playerSocket = socket(window.location.origin);
 
-    const playerSocket = socket(window.location.origin)
-
-    playerSocket.on('connect', () => {
-      console.log('connected to server')
-    })
+    playerSocket.on("connect", () => {
+      console.log("connected to server");
+    });
     // loading the fbx file of the player model
     const fbxLoader = new FBXLoader();
     fbxLoader.load("./resources/silverAvatarOrb.fbx", (fbxObj) => {
@@ -153,9 +189,6 @@ class Gallery extends React.Component {
 
     const stepIntoNextFrame = (timeElapsed) => {
       const timeElapsedSeconds = timeElapsed * 0.001;
-      if (mixers) {
-        mixers.map((mixer) => mixer.update(timeElapsedSeconds));
-      }
       if (controls) {
         controls.Update(timeElapsedSeconds);
       }
@@ -198,3 +231,6 @@ class Gallery extends React.Component {
 }
 
 export default Gallery;
+
+//reference for nightBox changing texture click event:
+//https://codepen.io/dipscom/pen/MpGYrq?editors=0010
