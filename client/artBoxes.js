@@ -188,6 +188,23 @@ export function createArtBoxes() {
     }),
   ];
 
+  // random x number between -20 and 50
+  let xVals = [
+    92, -15, -6, -21, -76, -59, 48, -85, 57, 76, -45, 18, 39, -56, -16, -30, 74,
+    -29, 74, 63, -21, 5, -59, 94, 56,
+  ];
+  // random y number between 4 and 6
+  let yVals = [
+    4, 5, 4, 5, 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 5, 4, 5, 5, 5, 5, 5, 5, 5,
+  ];
+  // random z number between -40 & 60
+
+  let zVals = [
+    -4, 35, -12, 6, -12, 24, -27, -10, 29, -8, 58, -15, 27, 17, -20, 24, 31, 53,
+    20, -19, -13, 35, -7, -6, 11,
+  ];
+  // generate random y number between 4 and 8
+
   for (let x = 0; x < art.length; x++) {
     let panels = [];
     for (let i = 1; i <= 6; i++) {
@@ -200,35 +217,13 @@ export function createArtBoxes() {
       }
     }
     const box = new THREE.Mesh(new THREE.BoxGeometry(6, 8, 1), panels);
-    if (x === 0) {
-      box.position.set(0, 4, -30);
-    } else if (x === 1) {
-      box.position.set(-15, 6, -15);
-    } else if (x === 2) {
-      box.position.set(10, 4, 20);
-    } else if (x === 3) {
-      box.position.set(25, 4, 10);
-    } else if (x === 4) {
-      box.position.set(18, 8, 30);
-    } else if (x === 5) {
-      box.position.set(40, 4, 60);
-    } else if (x === 6) {
-      box.position.set(50, 4, 40);
-    } else if (x === 7) {
-      box.position.set(45, 6, -20);
-    } else if (x === 8) {
-      box.position.set(50, 4, -40);
-    } else if (x === 9) {
-      box.position.set(-20, 4, 60);
-    } else if (x === 10) {
-      box.position.set(-10, 6, 50);
-    } else {
-      box.position.set(Math.random() + x * 10, 4, 0);
-    }
+    box.position.set(xVals[x], yVals[x], zVals[x]);
+
     box.name = `box_${x}`;
     box.castShadow = true;
     box.receiveShadow = true;
     artBoxes.push(box);
   }
+
   return artBoxes;
 }
