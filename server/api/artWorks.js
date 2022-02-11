@@ -13,14 +13,11 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    // const art = await Art.findByPk(req.params.id)
 
     const singleArtwork = await Art.findByPk(req.params.id, {
       include: {
         model: Artist,
-        // where: {
-        //   name: art.artistName
-        // }
+
       }
     })
 
