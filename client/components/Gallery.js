@@ -29,10 +29,10 @@ class Gallery extends React.Component {
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.set(25, 0, 0);
 
-//     let control = new OrbitControls(camera, world.domElement);
-//     control.addEventListener('change', world);
-//     window.minDistance = 5;
-//     control.maxDistance = 30;
+    //     let control = new OrbitControls(camera, world.domElement);
+    //     control.addEventListener('change', world);
+    //     window.minDistance = 5;
+    //     control.maxDistance = 30;
     // scene
     let scene = new THREE.Scene(); // container for everything in the scene
 
