@@ -27,7 +27,7 @@ const SingleArt = () => {
       <h4>{art.dimensions}</h4>
       <h4>DESCRIPTION: {art.description}</h4>
       <h4>BIO: {artist.bio}</h4>
-      <h4>{artist.website}</h4>
+      <a href={artist.website}><h4>{artist.website}</h4></a>
       </div>
     </div>
     </div>
