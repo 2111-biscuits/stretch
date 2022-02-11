@@ -9,7 +9,7 @@ constructor(props) {
 }
   componentDidMount() {
     this.props.fetchAllArt();
-    console.log(this.props, "all art")
+
   }
 
   render() {
@@ -24,10 +24,7 @@ constructor(props) {
                   <img src={art.image} />
                 </Link>
                 <h4>{art.title}</h4>
-                <h4>{art.dimensions}</h4>
-                <h4>{art.medium}</h4>
-                <h4>{art.yearMade}</h4>
-                <h4>{art.description}</h4>
+
               </div>
             </div>
           </div>

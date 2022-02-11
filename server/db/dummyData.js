@@ -1,7 +1,7 @@
 const arts = [
   {
     title: "Untitled",
-    image: "./artBox/cara_art.JPG",
+    image: "/artBox/cara_art.JPG",
     dimensions: "10in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -10,7 +10,7 @@ const arts = [
   },
   {
     title: "hi",
-    image: "./artBox/cara_art2.JPG",
+    image: "/artBox/cara_art2.JPG",
     dimensions: "10in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -19,7 +19,7 @@ const arts = [
   },
   {
     title: "Untitled",
-    image: "./artBox/lucy_untitled.jpg",
+    image: "/artBox/lucy_untitled.jpg",
     dimensions: "10in x 10in",
     medium: "Oil pastel on paper",
     yearMade: 2022,
@@ -28,7 +28,7 @@ const arts = [
   },
   {
     title: "Shallow Copy",
-    image: "./artBox/ShallowCopy.jpg",
+    image: "/artBox/ShallowCopy.jpg",
     dimensions: "12in x 18in",
     medium: "Mixed media on paper",
     yearMade: 2021,
@@ -37,7 +37,7 @@ const arts = [
   },
   {
     title: "Octopus",
-    image: "./artBox/Octopus.jpg",
+    image: "/artBox/Octopus.jpg",
     dimensions: "12in x 18in",
     medium: "Mixed media on paper",
     yearMade: 2021,
@@ -46,7 +46,7 @@ const arts = [
   },
   {
     title: "Dipping Hot Earth",
-    image: "./artBox/Dipping_Hot_Earth.jpg",
+    image: "/artBox/Dipping_Hot_Earth.jpg",
     dimensions: "36in x 48in",
     medium: "Acrylic paint on canvas",
     yearMade: 2020,
@@ -55,7 +55,7 @@ const arts = [
   },
   {
     title: "Untitled",
-    image: "./artBox/IMG_0011.JPG",
+    image: "/artBox/IMG_0011.JPG",
     dimensions: "36in x 48in",
     medium: "Acrylic paint on canvas",
     yearMade: 2020,
@@ -64,7 +64,7 @@ const arts = [
   },
   {
     title: "Sunflower",
-    image: "./artBox/Sunflower.png",
+    image: "/artBox/Sunflower.png",
     dimensions: "36in x 48in",
     medium: "Colored pencil on paper",
     yearMade: 2021,
@@ -73,7 +73,7 @@ const arts = [
   },
   {
     title: "Warpspeed (Sweet Angel)",
-    image: "./artBox/Warpspeed_Sweet_Angel.jpg",
+    image: "/artBox/Warpspeed_Sweet_Angel.jpg",
     dimensions: "36in x 48in",
     medium: "Acrylic paint on canvas",
     yearMade: 2020,
@@ -82,7 +82,7 @@ const arts = [
   },
   {
     title: "Long Faces",
-    image: "./artBox/nicoledrawing.jpg",
+    image: "/artBox/nicoledrawing.jpg",
     dimensions: "12in x 18in",
     medium: "Ink on paper",
     yearMade: 2015,
@@ -91,7 +91,7 @@ const arts = [
   },
   {
     title: "Untitled",
-    image: "./artBox/Yooboo_art.JPG",
+    image: "/artBox/Yooboo_art.JPG",
     dimensions: "24in x 18in",
     medium: "Acrylic paint on canvas",
     yearMade: 2016,
