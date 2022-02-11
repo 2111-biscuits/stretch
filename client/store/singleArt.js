@@ -11,7 +11,6 @@ export const fetchArt = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/artworks/${id}`);
-
       dispatch(setSingleArt(data));
     } catch (e) {
       console.log("COULDN'T FETCH SINGLE ART", e);
