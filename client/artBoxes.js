@@ -38,6 +38,62 @@ export function createArtBoxes() {
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/Yooboo_art.JPG"), //10
     }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Eclipse.jpg"), //11
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_NightCar.jpg"), //12
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection1.jpg"), //13
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection5.jpg"), //14
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection7.jpg"), //15
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Snow.jpg"), //16
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_ThreeTrees.jpg"), //17
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Window.jpg"), //18
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Headache.jpg"), //19
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Untitled.jpg"), //20
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/TerryPark_Germs.jpg"), //21
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_PortlandLobster.jpg"), //22
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_RedTurbulence.jpg"), //23
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_Untitled.jpg"), //24
+    }),
   ];
 
   const descriptions = [
@@ -73,6 +129,62 @@ export function createArtBoxes() {
     }),
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/Yooboo_desc.JPG"), //10
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Eclipse_Info.png"), //11
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_NightCar_Info.png"), //12
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection1_Info.png"), //13
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection5_Info.png"), //14
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Reflection7_Info.png"), //15
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Snow_Info.png"), //16
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_ThreeTrees_Info.png"), //17
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Lucy_Window_Info.png"), //18
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Headache_Info.png"), //19
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Nicole_Untitled_Info.png"), //20
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/TerryPark_Germs_Info.png"), //21
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_PortlandLobster_Info.png"), //22
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_RedTurbulence_Info.png"), //23
+    }),
+
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/WilliamPark_Untitled_Info.png"), //24
     }),
   ];
 
