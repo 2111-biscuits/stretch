@@ -164,3 +164,47 @@ a {
   height: 200px;
   object-fit: cover;
 }
+
+.navbar {
+  padding: 25px;
+  align-self: flex-start;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  text-align: left;
+  font-family: "Rowdies", cursive;
+  width: 157px;
+  background-color: #fffffb;
+  border: none;
+  font-size: 16px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fffffb;
+  width: 125px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0);
+  padding: 12px 16px;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+a:link,
+a:visited {
+  color: rgb(0, 0, 0);
+}
+
+a:hover {
+  color: rgb(0, 71, 159);
+}

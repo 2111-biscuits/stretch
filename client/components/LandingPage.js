@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import Navbar from "./Navbar";
 
 class LandingPage extends React.Component {
   render() {
     return (
       <div id="bg">
         <div id="landing">
+          <Navbar />
           <div id="top">
             <h1>Galleria</h1>
           </div>
