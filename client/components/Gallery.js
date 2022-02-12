@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setOrbColor } from "../store/filter";
 
-
 class Gallery extends React.Component {
   componentDidMount() {
     let orbColor = this.props.orbColor.Color;
@@ -63,8 +62,8 @@ class Gallery extends React.Component {
     light.shadow.camera.bottom = -200;
     scene.add(light);
 
-    light = new THREE.AmbientLight(0xffffff);
-    scene.add(light);
+    // let light = new THREE.AmbientLight(0xffffff);
+    // scene.add(light);
 
     //adding the art to the scene
     const artBoxes = createArtBoxes();
