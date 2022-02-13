@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchAllArt } from "../store/allArt";
+import Navbar from "./Navbar";
 
 class AllArt extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class AllArt extends Component {
     const allArt = this.props.allArt || [];
     return (
       <div id="allArt">
+        <Navbar />
         <h1>CURRENT EXHIBITION</h1>
         <div className="container">
           {allArt.map((art) => (
@@ -36,10 +38,10 @@ class AllArt extends Component {
 }
 
 const mapState = (state) => ({
-  allArt: state.allArt
+  allArt: state.allArt,
 });
 const mapDispatch = (dispatch) => ({
-  fetchAllArt: () => dispatch(fetchAllArt())
+  fetchAllArt: () => dispatch(fetchAllArt()),
 });
 
 export default connect(mapState, mapDispatch)(AllArt);

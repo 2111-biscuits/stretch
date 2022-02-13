@@ -3,6 +3,7 @@ import axios from "axios";
 import { fetchArt } from "../store";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Navbar from "./Navbar";
 
 const SingleArt = () => {
   const dispatch = useDispatch();
@@ -17,24 +18,26 @@ const SingleArt = () => {
 
   return (
     <div className="singleArt">
-    <h1>{art.title}</h1>
-    <div className="soloArtPiece" key={art.id}>
-      <img src={art.image} />
-      <div className="artInfo">
-      <h4>{artist.name}</h4>
-      <h4>{art.yearMade}</h4>
-      <h4>{art.medium}</h4>
-      <h4>{art.dimensions}</h4>
-      <h4>DESCRIPTION: {art.description}</h4>
-      <h4>BIO: {artist.bio}</h4>
-      <a href={artist.website}><h4>{artist.website}</h4></a>
+      <Navbar />
+      <h1>{art.title}</h1>
+      <div className="soloArtPiece" key={art.id}>
+        <img src={art.image} />
+        <div className="artInfo">
+          <h4>{artist.name}</h4>
+          <h4>{art.yearMade}</h4>
+          <h4>{art.medium}</h4>
+          <h4>{art.dimensions}</h4>
+          <h4>DESCRIPTION: {art.description}</h4>
+          <h4>BIO: {artist.bio}</h4>
+          <a href={artist.website}>
+            <h4>{artist.website}</h4>
+          </a>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
 export default SingleArt;
-
 
 // <div className="container">
 //   {allArt.map((art) => (
