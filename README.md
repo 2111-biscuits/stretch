@@ -22,6 +22,8 @@ git clone https://github.com/2111-biscuits/mvp.git
 
 npm install
 
+npm run seed
+
 npm start
 ```
 
