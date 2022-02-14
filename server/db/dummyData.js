@@ -23,7 +23,7 @@ const arts = [
     dimensions: "10in x 10in",
     medium: "Oil pastel on paper",
     yearMade: 2022,
-    description: "A meticulously crafted masterpiece",
+    description: "Adventures in form and color",
     artistName: "Lucy Blagg",
   },
   {
@@ -32,7 +32,7 @@ const arts = [
     dimensions: "12in x 18in",
     medium: "Mixed media on paper",
     yearMade: 2021,
-    description: "Beautifully crafted collage",
+    description: "Adventures in form and color",
     artistName: "Lucy Blagg",
   },
   {
@@ -41,7 +41,7 @@ const arts = [
     dimensions: "12in x 18in",
     medium: "Mixed media on paper",
     yearMade: 2021,
-    description: "Beautifully crafted collage",
+    description: "Adventures in form and color",
     artistName: "Lucy Blagg",
   },
   {
@@ -104,7 +104,8 @@ const arts = [
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
-    description: "The sensual tension of desire; the piece tries to convey the assaulting energy of wanting.",
+    description:
+      "The sensual tension of desire; the piece tries to convey the assaulting energy of wanting.",
     artistName: "Cara Dodge",
   },
   {
@@ -122,7 +123,8 @@ const arts = [
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
-    description: "Inspired by the experience of divinity and the personal interaction of destiny.",
+    description:
+      "Inspired by the experience of divinity and the personal interaction of destiny.",
     artistName: "Cara Dodge",
   },
   {
@@ -131,7 +133,8 @@ const arts = [
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
-    description: "Artist's self-portrait on the uprooting nature of dysmorphia.",
+    description:
+      "Artist's self-portrait on the uprooting nature of dysmorphia.",
     artistName: "Cara Dodge",
   },
 ];
@@ -143,8 +146,8 @@ const artists = [
   },
   {
     name: "Lucy Blagg",
-    bio: "Lucy has been practicing art for several years. The fresh, sea air that she has the pleasure of experiencing in Rhode Island serves as her muse.",
-    website: "www.lucy.com",
+    bio: "Lucy Blagg is an artist and software engineer based in Providence, Rhode Island.",
+    website: "https://www.instagram.com/unravellingbaby/",
   },
   {
     name: "German Caceres",
