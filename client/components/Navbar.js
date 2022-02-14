@@ -6,7 +6,7 @@ const Navbar = () => {
     <div class="navbar">
       <div class="dropdown">
         <button class="dropbtn">
-          <img id="navbar-icon" src="./resources/navbar.png" />
+          <img id="navbar-icon" src="/resources/navbar.png" />
         </button>
         <div class="dropdown-content">
           <Link to="/">Home</Link>
