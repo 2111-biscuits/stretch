@@ -339,6 +339,7 @@ a:-webkit-any-link {
   justify-content: center;
   align-items: center;
   border-radius: 5em;
+  width: 80%;
 }
 .logo-container {
   height: 200px;
