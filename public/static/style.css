@@ -1,6 +1,6 @@
 html,
 body,
-main{
+main {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   height: 100%;
@@ -15,19 +15,19 @@ select {
 }
 
 .skyblue {
-  background-color: skyblue
+  background-color: skyblue;
 }
 
 .darkorchid {
-  background-color: darkorchid
+  background-color: darkorchid;
 }
 
 .lightpink {
-  background-color: lightpink
+  background-color: lightpink;
 }
 
 .crimson {
-  background-color: crimson
+  background-color: crimson;
 }
 
 .darkorange {
@@ -35,15 +35,15 @@ select {
 }
 
 .gold {
-  background-color: gold
+  background-color: gold;
 }
 
 .limegreen {
-  background-color: limegreen
+  background-color: limegreen;
 }
 
 .turquoise {
-  background-color: turquoise
+  background-color: turquoise;
 }
 
 #bg {
@@ -76,7 +76,6 @@ select {
 #top h1 {
   font-size: 8rem;
 }
-
 
 #bottom {
   width: 100%;
@@ -174,7 +173,7 @@ a {
   justify-content: center;
   align-items: center;
   height: 1.75rem;
-  width: 27rem;
+  width: 30rem;
 }
 
 #mySong {
@@ -182,9 +181,8 @@ a {
   height: 30px;
 }
 
-
 #allArt {
-margin: 5rem
+  margin: 0;
 }
 
 .container {
@@ -198,7 +196,7 @@ margin: 5rem
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  width: 50rem;
+  width: 40rem;
   text-align: center;
   align-items: center;
   align-content: center;
@@ -209,7 +207,7 @@ margin: 5rem
   object-fit: cover;
 }
 .singleArt {
-  margin: 5rem
+  margin: 5rem;
 }
 .soloArtPiece {
   display: flex;
@@ -217,21 +215,20 @@ margin: 5rem
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 5rem;
-
 }
-.soloArtPiece img{
-  width: 40rem;
+.soloArtPiece img {
+  width: 35rem;
   height: 50rem;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .artInfo {
-  width: 40rem;
-  height: 50rem
+  width: 35rem;
+  height: 50rem;
 }
 .artInfo a {
   color: black;
-  text-decoration: none
+  text-decoration: none;
 }
 
 .navbar {
@@ -334,12 +331,22 @@ a:-webkit-any-link {
   cursor: pointer;
 }
 
+.techStack {
+  text-align: center;
+  display: flex;
+  padding: 5px;
+  background-color: rgb(190, 225, 245);
+  justify-content: center;
+  align-items: center;
+  border-radius: 5em;
+}
 .logo-container {
   height: 200px;
   width: 200px;
-  display: block;
+  display: flex;
   float: left;
   justify-content: center;
+  align-items: center;
 }
 .logo-container > img {
   display: flex;
@@ -349,4 +356,12 @@ a:-webkit-any-link {
 }
 #githubLink {
   size: 10rem;
+}
+
+.mission {
+  width: 60%;
+}
+
+.mission h4 {
+  text-transform: none;
 }
