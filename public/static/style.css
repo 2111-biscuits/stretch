@@ -185,8 +185,9 @@ a:hover {
   object-fit: cover;
 }
 .singleArt {
-  margin: 0rem;
+  margin: 2rem;
 }
+
 .soloArtPiece {
   display: flex;
   flex-direction: row;
@@ -195,13 +196,13 @@ a:hover {
   padding: 5rem;
 }
 .soloArtPiece img {
-  width: 35rem;
+  width: 30rem;
   height: 50rem;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .artInfo {
-  width: 35rem;
+  width: 30rem;
   height: 50rem;
 }
 .artInfo a {
