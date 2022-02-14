@@ -62,8 +62,8 @@ class Gallery extends React.Component {
     light.shadow.camera.bottom = -200;
     scene.add(light);
 
-    // let light = new THREE.AmbientLight(0xffffff);
-    // scene.add(light);
+    light = new THREE.AmbientLight(0xffffff);
+    scene.add(light);
 
     //adding the art to the scene
     const artBoxes = createArtBoxes();
