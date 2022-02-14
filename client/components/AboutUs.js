@@ -82,8 +82,10 @@ class AboutUs extends Component {
     const { info, tech } = this.state;
     return (
       <div className="aboutUs">
-        <Navbar />
-        <h2>About Us</h2>
+        <div id="top">
+          <Navbar />
+          <h1>About Us</h1>
+        </div>
         <div className="people">
           {info.map((creator) => (
             <div className="person" key={creator.id}>
@@ -111,7 +113,15 @@ class AboutUs extends Component {
           ))}
         </div>
         <div className="mission">
-          <h4><em>"We are four software engineers, each with our own backgrounds in creative practices. We wanted to merge our artistic interests into one all-encompassing virtual experience. We hope Galleria can be a place where users can relax, get inspired, and engage with art and their broader community."</em></h4>
+          <p>
+            <em>
+              "We are four software engineers, each with our own backgrounds in
+              creative practices. We wanted to merge our artistic interests into
+              one all-encompassing virtual experience. We hope Galleria can be a
+              place where users can relax, get inspired, and engage with art and
+              their broader community."
+            </em>
+          </p>
         </div>
         <h4>Tech Stack:</h4>
         <div className="techStack">

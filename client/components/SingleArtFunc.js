@@ -18,20 +18,20 @@ const SingleArt = () => {
 
   return (
     <div className="singleArt">
-      <Navbar />
-      <h1>{art.title}</h1>
+      <div id="top">
+        <Navbar />
+        <h1>{art.title}</h1>
+      </div>
       <div className="soloArtPiece" key={art.id}>
         <img src={art.image} />
         <div className="artInfo">
-          <h4>{artist.name}</h4>
-          <h4>{art.yearMade}</h4>
-          <h4>{art.medium}</h4>
-          <h4>{art.dimensions}</h4>
-          <h4>DESCRIPTION: {art.description}</h4>
-          <h4>BIO: {artist.bio}</h4>
-          <a href={artist.website}>
-            <h4>{artist.website}</h4>
-          </a>
+          <p>{artist.name}</p>
+          <p>{art.yearMade}</p>
+          <p>{art.medium}</p>
+          <p>{art.dimensions}</p>
+          <p>DESCRIPTION: {art.description}</p>
+          <p>BIO: {artist.bio}</p>
+          <a href={artist.website}>{artist.website}</a>
         </div>
       </div>
     </div>

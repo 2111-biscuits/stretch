@@ -17,6 +17,7 @@ const seed = async () => {
         return Artist.create(artist);
       })
     );
+
     for (let i = 0; i < 25; i++) {
       if (i <= 1 || (i >= 13 && i < 25)) {
         await art[i].setArtist(artist[0]);

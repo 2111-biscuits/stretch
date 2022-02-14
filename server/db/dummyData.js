@@ -118,7 +118,7 @@ const arts = [
   },
   {
     title: "Fallen",
-    image: "/artBox/",
+    image: "/artBox/Cara_Fallen.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -128,7 +128,7 @@ const arts = [
   },
   {
     title: "Self-portrait",
-    image: "/artBox/",
+    image: "/artBox/Cara_Self-portrait.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -137,7 +137,7 @@ const arts = [
   },
   {
     title: "Revelation",
-    image: "/artBox/",
+    image: "/artBox/Cara_Revelation.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -147,7 +147,7 @@ const arts = [
   },
   {
     title: "Mirror",
-    image: "/artBox/",
+    image: "/artBox/Cara_Mirror.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -157,7 +157,7 @@ const arts = [
   },
   {
     title: "Prayers on a New Year",
-    image: "/artBox/",
+    image: "/artBox/Cara_PrayersonaNewYear.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -166,7 +166,7 @@ const arts = [
   },
   {
     title: "Nectar",
-    image: "/artBox/",
+    image: "/artBox/Cara_Nectar.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -175,7 +175,7 @@ const arts = [
   },
   {
     title: "Sometimes I Cannot Take This",
-    image: "/artBox/",
+    image: "/artBox/Cara_SometimesICannotTakeThis.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -184,7 +184,7 @@ const arts = [
   },
   {
     title: "Wise-Men",
-    image: "/artBox/",
+    image: "/artBox/Cara_Wise-Men.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -193,7 +193,7 @@ const arts = [
   },
   {
     title: "Bulgarian Singers",
-    image: "/artBox/",
+    image: "/artBox/Cara_BulgarianSingers.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -202,7 +202,7 @@ const arts = [
   },
   {
     title: "We've Come So Far",
-    image: "/artBox/",
+    image: "/artBox/Cara_WeveComeSoFar.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2021,
@@ -211,7 +211,7 @@ const arts = [
   },
   {
     title: "My Inheritance",
-    image: "/artBox/",
+    image: "/artBox/Cara_MyInheritance.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2022,
@@ -220,7 +220,7 @@ const arts = [
   },
   {
     title: "For My Brother",
-    image: "/artBox/",
+    image: "/artBox/Cara_ForMyBrother.jpg",
     dimensions: "8in x 10in",
     medium: "Black ink on paper",
     yearMade: 2022,

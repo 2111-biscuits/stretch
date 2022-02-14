@@ -1,8 +1,6 @@
 html,
 body,
 main {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   height: 100%;
   margin: 0;
   min-width: 1000px;
@@ -103,54 +101,32 @@ select {
   margin-left: 5rem;
 }
 
-#gallery {
-  position: relative;
-  top: 10;
-  left: 10;
-}
-
-#gallery > #navbar {
-  position: absolute;
-  top: 10;
-  left: 10;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  background-color: transparent;
-  z-index: 1;
-  width: 97%;
-  padding: 10px;
-  font-size: 12px;
-  font-family: monospace;
-}
-
-#3dworld {
-  position: absolute;
-  top: 10;
-  left: 10;
-}
-
 h1,
+h2,
 h3,
 h4 {
   text-transform: uppercase;
+  font-family: "Rowdies";
 }
 
-h1 {
-  font-size: 72px;
-}
-
-#exit-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-family: monospace;
+p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 16px;
 }
 
 a {
   text-decoration: none;
+  font-family: "Rowdies";
+}
+
+a:link,
+a:visited {
+  color: rgb(0, 0, 0);
+}
+
+a:hover {
+  color: rgb(0, 71, 159);
 }
 
 .movement-directions,
@@ -183,6 +159,8 @@ a {
 
 #allArt {
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -191,12 +169,12 @@ a {
   justify-content: space-evenly;
 }
 .card {
-  margin: 5rem;
+  margin: 2rem;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  width: 40rem;
+  width: 35rem;
   text-align: center;
   align-items: center;
   align-content: center;
@@ -209,6 +187,7 @@ a {
 .singleArt {
   margin: 2rem;
 }
+
 .soloArtPiece {
   display: flex;
   flex-direction: row;
@@ -262,6 +241,7 @@ a {
   padding: 12px 16px;
   z-index: 1;
   font-size: 14px;
+  font-family: "Rowdies," cursive;
 }
 
 .dropdown:hover .dropdown-content {
@@ -269,20 +249,11 @@ a {
   flex-direction: column;
 }
 
-a:link,
-a:visited {
-  color: rgb(0, 0, 0);
-}
-
-a:hover {
-  color: rgb(0, 71, 159);
-}
 /*aboutUs*/
 .aboutUs {
   display: flex;
   align-items: center;
-  padding-left: 5%;
-  padding-right: 5%;
+  width: 100%;
   flex-direction: column;
   padding-bottom: 30px;
 }
@@ -339,6 +310,7 @@ a:-webkit-any-link {
   justify-content: center;
   align-items: center;
   border-radius: 5em;
+  width: 80%;
 }
 .logo-container {
   height: 200px;
@@ -362,6 +334,66 @@ a:-webkit-any-link {
   width: 60%;
 }
 
-.mission h4 {
+.mission p {
   text-transform: none;
+}
+
+#allArt > #top,
+.aboutUs > #top,
+.singleArt > #top {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.aboutUs > #bottom {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#allArt > #top > h1,
+.aboutUs > #top > h1,
+.singleArt > #top > h1 {
+  font-size: 48px;
+}
+
+#gallery {
+  position: relative;
+  top: 10;
+  left: 10;
+}
+
+#gallery > #navbar {
+  position: absolute;
+  top: 10;
+  left: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: transparent;
+  z-index: 1;
+  width: 97%;
+  padding: 10px;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+#3dworld {
+  position: absolute;
+  top: 10;
+  left: 10;
+}
+
+#exit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: monospace;
 }
