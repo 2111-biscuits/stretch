@@ -94,6 +94,39 @@ export function createArtBoxes() {
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/WilliamPark_Untitled.jpg"), //24
     }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_BulgarianSingers.jpg"), //25
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Fallen.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_ForMyBrother.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Mirror.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_MyInheritance.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Nectar.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_PrayersonaNewYear.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Self-portrait.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_SometimesICannotTakeThis.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_WeveComeSoFar.jpg"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Wise-Men.jpg"), //24
+    }),
   ];
 
   const descriptions = [
@@ -186,22 +219,57 @@ export function createArtBoxes() {
     new THREE.MeshBasicMaterial({
       map: boxLoader.load("artBox/WilliamPark_Untitled_Info.png"), //24
     }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_BulgarianSingers_Info.png"), //25
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Fallen_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_ForMyBrother_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Mirror_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_MyInheritance_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Nectar_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_PrayersonaNewYear_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Self-portrait_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_SometimesICannotTakeThis_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_WeveComeSoFar_Info.png"), //24
+    }),
+    new THREE.MeshBasicMaterial({
+      map: boxLoader.load("artBox/Cara_Wise-Men_Info.png"), //24
+    }),
   ];
 
   // random x number between -100 and 100
   let xVals = [
     92, -15, -6, -21, -76, -59, 48, -85, 57, 76, -45, 18, 39, -56, -16, -30, 74,
-    -29, 74, 63, -21, 5, -59, 94, 56,
+    -29, 74, 63, -21, 5, -59, 94, 56, 85, -90, 15, 35, 110, -110, 100, -100, 20,
+    90, 40, 60,
   ];
   // random y number between 4 and 6
   let yVals = [
     4, 5, 4, 5, 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 5, 4, 5, 5, 5, 5, 5, 5, 5,
+    5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4,
   ];
   // random z number between -40 & 60
 
   let zVals = [
     -4, 35, -12, 6, -12, 24, -27, -10, 29, -8, 58, -15, 27, 17, -20, 24, 31, 53,
-    20, -19, -13, 35, -7, -6, 11,
+    20, -19, -13, 35, -7, -6, 11, 40, 60, -20, 30, 35, 32, 15, 19, 5, 9, 22, 1,
   ];
 
   for (let x = 0; x < art.length; x++) {

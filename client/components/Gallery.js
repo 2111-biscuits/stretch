@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setOrbColor } from "../store/filter";
 
-
 class Gallery extends React.Component {
   componentDidMount() {
     let orbColor = this.props.orbColor.Color;
