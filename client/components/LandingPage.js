@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { setOrbColor } from "../store/filter";
 import Navbar from "./Navbar";
 
-
 class LandingPage extends React.Component {
   render() {
     return (

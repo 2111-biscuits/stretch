@@ -16,8 +16,10 @@ class AllArt extends Component {
     const allArt = this.props.allArt || [];
     return (
       <div id="allArt">
-        <Navbar />
-        <h1>CURRENT EXHIBITION</h1>
+        <div id="top">
+          <Navbar />
+          <h1 id="exhibitions">CURRENT EXHIBITION</h1>
+        </div>
         <div className="container">
           {allArt.map((art) => (
             <div className="card" key={art.id}>
