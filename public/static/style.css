@@ -207,7 +207,7 @@ a {
   object-fit: cover;
 }
 .singleArt {
-  margin: 5rem;
+  margin: 2rem;
 }
 .soloArtPiece {
   display: flex;
@@ -217,13 +217,13 @@ a {
   padding: 5rem;
 }
 .soloArtPiece img {
-  width: 35rem;
+  width: 30rem;
   height: 50rem;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .artInfo {
-  width: 35rem;
+  width: 30rem;
   height: 50rem;
 }
 .artInfo a {
