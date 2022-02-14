@@ -83,7 +83,7 @@ class AboutUs extends Component {
     return (
       <div className="aboutUs">
         <Navbar />
-        <h2>Creators</h2>
+        <h2>About Us</h2>
         <div className="people">
           {info.map((creator) => (
             <div className="person" key={creator.id}>
@@ -110,9 +110,10 @@ class AboutUs extends Component {
             </div>
           ))}
         </div>
-        <a id="githubLink" href="https://github.com/2111-biscuits/stretch">
-          <h4>Check out our Github repository</h4>
-        </a>
+        <div className="mission">
+          <h4><em>"We are four software engineers, each with our own backgrounds in creative practices. We wanted to merge our artistic interests into one all-encompassing virtual experience. We hope Galleria can be a place where users can relax, get inspired, and engage with art and their broader community."</em></h4>
+        </div>
+        <h4>Tech Stack:</h4>
         <div className="techStack">
           {tech.map((logo) => (
             <div className="logo-container" key={logo.id}>
@@ -120,22 +121,12 @@ class AboutUs extends Component {
             </div>
           ))}
         </div>
+        <a id="githubLink" href="https://github.com/2111-biscuits/stretch">
+          <h4>Check out Galleria's Github repository</h4>
+        </a>
       </div>
     );
   }
 }
 
 export default AboutUs;
-{
-  /* <div className="credits">
-                <h4>{creator.name}</h4>
-                <div className="links">
-                  <a href={creator.linkedInURL}>
-                    <img className="logo" src="resources/logos/linkedinLogo.png" />
-                  </a>
-                  <a href={creator.githubURL}>
-                    <img className="logo" src="resources/logos/githubLogo.png" />
-                  </a>
-                </div>
-              </div> */
-}
