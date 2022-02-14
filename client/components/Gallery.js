@@ -161,6 +161,11 @@ class Gallery extends React.Component {
       fbxLoader.load(sculpturePath, (sculpture) => {
         sculpture.scale.set(0.25, 0.25, 0.25);
         sculpture.position.set(xVals[idx], yVals[idx], zVals[idx]);
+        for (let i = 0; i < 3; i++) {
+          if (sculpture.children[i].name === "Light") {
+            sculpture.children[i].intensity = 0;
+          }
+        }
         scene.add(sculpture);
         art.push(sculpture);
       })

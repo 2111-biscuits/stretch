@@ -90,6 +90,24 @@ const arts = [
     artistName: "Nicole DeSantis",
   },
   {
+    title: "Headache",
+    image: "/artBox/Nicole_Headache.jpg",
+    dimensions: "12in x 18in",
+    medium: "Black ink on paper",
+    yearMade: 2015,
+    description: "Doodles drawn when feeling sad and overwhelmed",
+    artistName: "Nicole DeSantis",
+  },
+  {
+    title: "Untitled",
+    image: "/artBox/Nicole_Untitled.jpg",
+    dimensions: "18in x 12in",
+    medium: "Colored pencil on paper",
+    yearMade: 2015,
+    description: "A mythical world within a moon",
+    artistName: "Nicole DeSantis",
+  },
+  {
     title: "Untitled",
     image: "/artBox/Yooboo_art.JPG",
     dimensions: "24in x 18in",
@@ -156,7 +174,7 @@ const artists = [
   },
   {
     name: "Nicole DeSantis",
-    bio: "Nicole starting drawing at a young age and hasn't put the pencil down since. She is currently experimenting with watercolors.",
+    bio: "Nicole works in software development by day and enjoys drawing and painting by night. She is currently experimenting with watercolors.",
     website: "www.nicole.com",
   },
   {

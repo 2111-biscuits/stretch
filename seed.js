@@ -18,15 +18,15 @@ const seed = async () => {
       })
     );
     for (let i = 0; i < 11; i++) {
-      if (i <= 1) {
+      if (i <= 1 || (i >= 13 && i < 17)) {
         await art[i].setArtist(artist[0]);
       } else if (i >= 2 && i < 5) {
         await art[i].setArtist(artist[1]);
       } else if (i >= 5 && i < 9) {
         await art[i].setArtist(artist[2]);
-      } else if (i === 9) {
+      } else if (i >= 9 && i < 12) {
         await art[i].setArtist(artist[3]);
-      } else if (i === 10) {
+      } else if (i === 12) {
         await art[i].setArtist(artist[4]);
       }
     }
